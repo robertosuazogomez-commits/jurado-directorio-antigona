@@ -10,6 +10,27 @@ app.use(express.static(path.join(__dirname,'public')));
 
 app.get('/api/health',(_req,res)=>res.json({ok:true,supabaseConfigured:!!(SUPABASE_URL&&SUPABASE_KEY)}));
 
+app.get('/api/votes',async(req,res)=>{
+  if(!SUPABASE_URL||!SUPABASE_KEY)
+    return res.status(500).json({ok:false,error:'Supabase no está configurado en Render.'});
+  try{
+    const params=new URLSearchParams({select:'id,presentacion,estudiante,bando,argumentacion,refutacion,actuacion,justificacion,evidencia,created_at',order:'created_at.desc'});
+    if(req.query.presentacion) params.set('presentacion','eq.'+Number(req.query.presentacion));
+    const r=await fetch(`${SUPABASE_URL}/rest/v1/votaciones?${params.toString()}`,{
+      headers:{apikey:SUPABASE_KEY,Authorization:`Bearer ${SUPABASE_KEY}`}
+    });
+    const text=await r.text();
+    if(!r.ok){
+      console.error('Supabase votos:',r.status,text);
+      return res.status(502).json({ok:false,error:'No se pudieron leer las votaciones. Revisa los permisos de lectura de la tabla votaciones en Supabase.'});
+    }
+    res.json({ok:true,votos:JSON.parse(text)});
+  }catch(err){
+    console.error(err);
+    res.status(502).json({ok:false,error:'Error de conexión con Supabase.'});
+  }
+});
+
 app.post('/api/vote',async(req,res)=>{
   if(!SUPABASE_URL||!SUPABASE_KEY)
     return res.status(500).json({ok:false,error:'Supabase no está configurado en Render.'});

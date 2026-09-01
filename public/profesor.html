@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Profesor · Jurado del Directorio</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap');
+:root{--ink:#19171a;--paper:#f3eee5;--cream:#faf7f0;--wine:#6d1f2d;--navy:#19394b;--gold:#b69255;--line:#d9d0c1;--muted:#716d68}
+*{box-sizing:border-box}body{margin:0;background:#252327;color:var(--ink);font-family:"DM Sans",system-ui,sans-serif}.app{max-width:1280px;margin:auto;padding:18px}.shell{background:var(--paper);min-height:100vh}.top{background:var(--ink);color:#f8f3e9;padding:18px 28px;display:flex;justify-content:space-between;align-items:center;gap:20px}.top .ey{font-size:10px;letter-spacing:2px;color:#d9bc83;text-transform:uppercase}.top h1{font:700 32px/1 "Playfair Display",Georgia,serif;margin:6px 0 0}.top a{color:#f8f3e9;text-decoration:none;border:1px solid #666;padding:10px 14px;font-size:11px}.content{padding:28px}.hero{display:flex;justify-content:space-between;gap:20px;align-items:end;border-bottom:1px solid var(--ink);padding-bottom:16px;margin-bottom:20px}.hero h2{font:700 34px/1 "Playfair Display",Georgia,serif;margin:0}.hero p{color:var(--muted);font-size:12px;margin:7px 0 0}.actions{display:flex;gap:9px;flex-wrap:wrap}.btn,select{border:1px solid var(--ink);background:var(--cream);padding:11px 14px;font:600 11px "DM Sans";cursor:pointer}.btn.primary{background:var(--ink);color:#fff}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}.card{background:var(--cream);border:1px solid var(--line);padding:18px}.card span{display:block;text-transform:uppercase;letter-spacing:1.4px;font-size:9px;color:var(--muted)}.card strong{display:block;font:700 30px "Playfair Display";margin-top:5px}.card.wine strong{color:var(--wine)}.card.navy strong{color:var(--navy)}.table-wrap{background:#fffdf8;border:1px solid var(--line);overflow:auto}.table-head{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}.table-head strong{font:700 20px "Playfair Display"}.table-head span{font-size:11px;color:var(--muted)}table{border-collapse:collapse;width:100%;min-width:1050px}th,td{padding:12px 13px;border-bottom:1px solid #e7dfd3;text-align:left;vertical-align:top;font-size:11px}th{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);background:#f6f0e7;position:sticky;top:0}td.small{white-space:nowrap;color:#5d5954}.band{display:inline-block;padding:5px 8px;font-weight:800;font-size:9px;letter-spacing:1px;color:white}.band.A{background:var(--wine)}.band.B{background:var(--navy)}.score{font-weight:800;font-size:13px}.empty{padding:35px;text-align:center;color:var(--muted)}.error{display:none;background:#f7e6e5;border:1px solid #b56b6b;padding:14px;margin-bottom:18px;font-size:12px}.error.show{display:block}.summary{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}.barbox{background:var(--cream);border:1px solid var(--line);padding:16px}.barline{height:12px;background:#ddd4c8;margin-top:8px}.bar{height:100%;transition:.3s}.bar.a{background:var(--wine)}.bar.b{background:var(--navy)}@media(max-width:800px){.cards{grid-template-columns:1fr 1fr}.hero{align-items:start;flex-direction:column}.content{padding:18px}.top{padding:15px}.top h1{font-size:25px}}
+</style>
+</head>
+<body><div class="app"><div class="shell">
+<header class="top"><div><div class="ey">Panel de profesor · Registro de veredictos</div><h1>Antígona · El Jurado del Directorio</h1></div><a href="/">← Vista estudiante</a></header>
+<main class="content">
+<section class="hero"><div><h2>Registro de votaciones</h2><p>Aquí quedan reunidos los veredictos enviados por el curso.</p></div><div class="actions"><select id="filter"><option value="">Todas las presentaciones</option></select><button class="btn primary" id="refresh">↻ Actualizar</button><button class="btn" id="csv">↓ Descargar CSV</button></div></section>
+<div id="error" class="error"></div>
+<section class="cards"><div class="card"><span>Veredictos</span><strong id="total">—</strong></div><div class="card wine"><span>Bando A</span><strong id="countA">—</strong></div><div class="card navy"><span>Bando B</span><strong id="countB">—</strong></div><div class="card"><span>Promedio general</span><strong id="avg">—</strong></div></section>
+<section class="summary"><div class="barbox"><b>Preferencia del jurado · Bando A</b><div class="barline"><div class="bar a" id="barA"></div></div></div><div class="barbox"><b>Preferencia del jurado · Bando B</b><div class="barline"><div class="bar b" id="barB"></div></div></div></section>
+<section class="table-wrap"><div class="table-head"><strong>Detalle de los veredictos</strong><span id="updated">Cargando…</span></div><table><thead><tr><th>Fecha</th><th>Presentación</th><th>Estudiante</th><th>Convenció mejor</th><th>Argumentación</th><th>Refutación</th><th>Actuación</th><th>Justificación</th><th>Evidencia</th></tr></thead><tbody id="tbody"></tbody></table><div class="empty" id="empty" style="display:none">Todavía no hay votaciones registradas.</div></section>
+</main></div></div>
+<script>
+let allVotes=[];
+const $=id=>document.getElementById(id);
+function esc(v){return String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
+function avg(v){if(!v.length)return '—';const n=v.reduce((s,x)=>s+(+x.argumentacion||0)+(+x.refutacion||0)+(+x.actuacion||0),0)/(v.length*3);return n.toFixed(2);}
+function render(){
+ const f=$('filter').value;const votes=f?allVotes.filter(v=>String(v.presentacion)===f):allVotes;
+ const a=votes.filter(v=>v.bando==='A').length,b=votes.filter(v=>v.bando==='B').length,total=votes.length;
+ $('total').textContent=total;$('countA').textContent=a;$('countB').textContent=b;$('avg').textContent=avg(votes);
+ $('barA').style.width=(total?a/total*100:0)+'%';$('barB').style.width=(total?b/total*100:0)+'%';
+ const ps=[...new Set(allVotes.map(v=>v.presentacion))].sort((a,b)=>a-b);const sel=$('filter');const old=sel.value;sel.innerHTML='<option value="">Todas las presentaciones</option>'+ps.map(p=>`<option value="${p}">Presentación ${p}</option>`).join('');sel.value=ps.map(String).includes(old)?old:'';
+ $('tbody').innerHTML=votes.map(v=>`<tr><td class="small">${v.created_at?new Date(v.created_at).toLocaleString('es-CL'):''}</td><td><b>${esc(v.presentacion)}</b></td><td>${esc(v.estudiante)}</td><td><span class="band ${esc(v.bando)}">BANDO ${esc(v.bando)}</span></td><td class="score">${esc(v.argumentacion)}/5</td><td class="score">${esc(v.refutacion)}/5</td><td class="score">${esc(v.actuacion)}/5</td><td>${esc(v.justificacion)}</td><td>${esc(v.evidencia)}</td></tr>`).join('');
+ $('empty').style.display=votes.length?'none':'block';$('updated').textContent='Actualizado '+new Date().toLocaleTimeString('es-CL');
+}
+async function load(){
+ $('error').classList.remove('show');$('updated').textContent='Actualizando…';
+ try{const r=await fetch('/api/votes');const d=await r.json();if(!r.ok||!d.ok)throw new Error(d.error||'No se pudo cargar el registro.');allVotes=d.votos||[];render();}
+ catch(e){$('error').textContent=e.message+' Si aparece un error de permisos, hay que habilitar lectura de la tabla votaciones en Supabase.';$('error').classList.add('show');$('tbody').innerHTML='';$('updated').textContent='Error';}
+}
+$('filter').onchange=render;$('refresh').onclick=load;$('csv').onclick=()=>{const f=$('filter').value;const votes=f?allVotes.filter(v=>String(v.presentacion)===f):allVotes;const headers=['fecha','presentacion','estudiante','bando','argumentacion','refutacion','actuacion','justificacion','evidencia'];const csv=[headers,...votes.map(v=>headers.map(h=>v[h]??''))].map(row=>row.map(x=>'"'+String(x).replaceAll('"','""')+'"').join(',')).join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}));a.download='registro-jurado-directorio.csv';a.click();};
+load();setInterval(load,30000);
+</script></body></html>
