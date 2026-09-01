@@ -1,1680 +1,1243 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#17161a">
-<title>Antígona · El Jurado del Directorio</title>
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap');
-
-:root{
-  --ink:#19171a;
-  --paper:#f3eee5;
-  --cream:#faf7f0;
-  --white:#fffdf8;
-  --wine:#6d1f2d;
-  --wine2:#8d3040;
-  --navy:#19394b;
-  --gold:#b69255;
-  --line:#d9d0c1;
-  --muted:#716d68;
-  --shadow:0 22px 70px rgba(24,18,14,.18);
-}
-
-*{box-sizing:border-box}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  margin:0;
-  background:#252327;
-  color:var(--ink);
-  font-family:"DM Sans",system-ui,sans-serif;
-}
-
-button,
-input,
-select,
-textarea{
-  font:inherit;
-}
-
-button{
-  touch-action:manipulation;
-}
-
-.app{
-  max-width:1180px;
-  margin:0 auto;
-  padding:18px;
-}
-
-.shell{
-  background:var(--paper);
-  min-height:100vh;
-  box-shadow:var(--shadow);
-  overflow:hidden;
-}
-
-/* =========================================================
-   CABECERA
-========================================================= */
-
-.masthead{
-  background:var(--ink);
-  color:#f8f3e9;
-  padding:14px 30px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-  font-size:11px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-}
-
-.masthead b{
-  color:#d9bc83;
-}
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero{
-  position:relative;
-  min-height:520px;
-  overflow:hidden;
-  background:#c8c0b4;
-}
-
-.hero:before{
-  content:"";
-  position:absolute;
-  inset:0;
-  z-index:1;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(250,247,240,.98) 0%,
-      rgba(250,247,240,.93) 27%,
-      rgba(250,247,240,.42) 48%,
-      rgba(34,29,25,.08) 72%,
-      rgba(34,29,25,.28) 100%
-    ),
-    linear-gradient(
-      0deg,
-      rgba(20,17,15,.35),
-      transparent 45%
-    );
-}
-
-.hero-copy{
-  position:relative;
-  z-index:5;
-  padding:54px 46px 45px;
-  width:55%;
-  max-width:620px;
-}
-
-.eyebrow{
-  font-size:11px;
-  letter-spacing:2.5px;
-  text-transform:uppercase;
-  color:var(--wine);
-  font-weight:800;
-}
-
-h1{
-  font-family:"Playfair Display",Georgia,serif;
-  font-size:clamp(44px,5.5vw,72px);
-  line-height:.94;
-  letter-spacing:-2.5px;
-  margin:11px 0 18px;
-}
-
-h1 em{
-  font-style:normal;
-  color:var(--wine);
-}
-
-.lede{
-  max-width:520px;
-  font-size:14px;
-  line-height:1.65;
-  color:#383430;
-  margin:0;
-}
-
-/* Imagen */
-
-.hero-mark{
-  position:absolute;
-  inset:0;
-  z-index:2;
-  display:flex;
-  align-items:flex-end;
-  justify-content:center;
-  overflow:hidden;
-  background:
-    radial-gradient(
-      circle at 50% 42%,
-      rgba(255,255,255,.35),
-      transparent 34%
-    ),
-    linear-gradient(
-      180deg,
-      #c8c0b4,
-      #a89d8e
-    );
-}
-
-.hero-mark:after{
-  content:"";
-  position:absolute;
-  inset:auto 0 0;
-  height:45%;
-  background:linear-gradient(
-    0deg,
-    rgba(42,34,28,.42),
-    transparent
-  );
-  z-index:1;
-}
-
-.office-line{
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(
-      90deg,
-      transparent 0 8%,
-      rgba(255,255,255,.26) 8.2% 8.7%,
-      transparent 8.9% 91%,
-      rgba(255,255,255,.22) 91.2% 91.7%,
-      transparent 92%
-    ),
-    linear-gradient(
-      180deg,
-      transparent 0 45%,
-      rgba(70,62,54,.18) 45.5% 46%,
-      transparent 46.5%
-    );
-  opacity:.8;
-  z-index:0;
-}
-
-.portrait-frame{
-  position:relative;
-  z-index:3;
-  width:min(40vw,400px);
-  min-width:290px;
-  margin-left:30%;
-  margin-bottom:58px;
-  border:9px solid #3d2d1c;
-  background:#171419;
-  padding:8px;
-  box-shadow:
-    0 28px 55px rgba(0,0,0,.42),
-    0 0 0 2px #b69255;
-}
-
-.portrait-frame img{
-  display:block;
-  width:100%;
-  aspect-ratio:4/3;
-  object-fit:cover;
-  background:linear-gradient(145deg,#403b35,#171419);
-  filter:saturate(.82) contrast(1.04);
-}
-
-.portrait-fallback{
-  align-items:center;
-  justify-content:center;
-  min-height:220px;
-  color:#d9bc83;
-  font-family:"Playfair Display",serif;
-  font-size:62px;
-}
-
-/* Placa */
-
-.founder-plaque{
-  position:absolute;
-  z-index:5;
-  bottom:-5px;
-  left:50%;
-  transform:translateX(-50%);
-  width:75%;
-  text-align:center;
-  background:linear-gradient(#bfa16b,#8e7040);
-  color:#211b15;
-  border:2px solid #624a28;
-  box-shadow:0 8px 18px rgba(0,0,0,.32);
-  padding:9px 15px;
-  font-family:Georgia,serif;
-}
-
-.founder-plaque b{
-  display:block;
-  font-size:17px;
-  letter-spacing:1px;
-}
-
-.founder-plaque span{
-  display:block;
-  font-size:13px;
-  letter-spacing:3px;
-  margin-top:3px;
-}
-
-/* Conflicto */
-
-.case-card{
-  position:absolute;
-  z-index:6;
-  right:30px;
-  top:30px;
-  width:250px;
-  padding:17px 19px;
-  background:rgba(24,22,25,.94);
-  color:#f8f3e9;
-  border-left:5px solid var(--gold);
-  box-shadow:0 18px 38px rgba(0,0,0,.28);
-}
-
-.case-card .label{
-  font-size:9px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  color:#d9bc83;
-}
-
-.case-card h2{
-  font-family:"Playfair Display",Georgia,serif;
-  font-size:25px;
-  line-height:1.05;
-  margin:7px 0;
-}
-
-.case-card p{
-  font-size:11px;
-  line-height:1.48;
-  color:#d4d0c9;
-  margin:0;
-}
-
-.case-no{
-  position:absolute;
-  right:14px;
-  top:11px;
-  font-family:"Playfair Display";
-  font-size:13px;
-  color:#d9bc83;
-}
-
-/* =========================================================
-   CONTENIDO
-========================================================= */
-
-.content{
-  padding:38px 42px 55px;
-}
-
-.section-label{
-  display:flex;
-  align-items:end;
-  justify-content:space-between;
-  gap:20px;
-  border-bottom:1px solid var(--ink);
-  padding-bottom:10px;
-  margin:0 0 16px;
-}
-
-.section-label h2{
-  font-family:"Playfair Display",Georgia,serif;
-  font-size:27px;
-  margin:0;
-}
-
-.section-label span{
-  font-size:10px;
-  color:var(--muted);
-  text-transform:uppercase;
-  letter-spacing:1px;
-}
-
-/* =========================================================
-   IDENTIDAD
-========================================================= */
-
-.identity{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  background:var(--ink);
-  padding:16px;
-  margin-bottom:34px;
-}
-
-.field label{
-  display:block;
-  color:#c9c3ba;
-  font-size:9px;
-  letter-spacing:1.4px;
-  text-transform:uppercase;
-  font-weight:700;
-  margin:0 0 6px;
-}
-
-.field input,
-.field select{
-  width:100%;
-  border:1px solid #555158;
-  background:#29272b;
-  color:#fff;
-  padding:12px 13px;
-  border-radius:2px;
-  outline:none;
-}
-
-.field input:focus,
-.field select:focus{
-  border-color:#d9bc83;
-  box-shadow:0 0 0 2px rgba(217,188,131,.14);
-}
-
-/* =========================================================
-   CRITERIOS
-========================================================= */
-
-.criteria{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  margin-bottom:34px;
-}
-
-.criterion{
-  background:var(--cream);
-  border:1px solid var(--line);
-  padding:17px;
-  min-height:135px;
-  position:relative;
-}
-
-.criterion .n{
-  font-size:9px;
-  letter-spacing:2px;
-  color:var(--gold);
-  font-weight:700;
-}
-
-.criterion h3{
-  font-family:"Playfair Display",Georgia,serif;
-  font-size:21px;
-  margin:7px 0 6px;
-}
-
-.criterion p{
-  font-size:11px;
-  line-height:1.55;
-  color:#64605b;
-  margin:0;
-}
-
-/* =========================================================
-   PUNTAJES
-========================================================= */
-
-.scores{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  margin-bottom:35px;
-}
-
-.score{
-  background:#fffdf8;
-  border:1px solid var(--line);
-  padding:17px;
-}
-
-.score-top{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  align-items:center;
-}
-
-.score-top b{
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:.7px;
-}
-
-.value{
-  font-family:"Playfair Display",Georgia,serif;
-  color:var(--wine);
-  font-size:24px;
-  font-weight:700;
-}
-
-input[type=range]{
-  width:100%;
-  accent-color:var(--wine);
-  margin:17px 0 7px;
-  height:25px;
-}
-
-.scale{
-  display:flex;
-  justify-content:space-between;
-  color:#99928a;
-  font-size:9px;
-}
-
-/* =========================================================
-   VEREDICTO
-========================================================= */
-
-.verdict-wrap{
-  background:var(--ink);
-  color:#f8f3e9;
-  padding:28px;
-  margin-top:5px;
-}
-
-.verdict-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:end;
-  gap:20px;
-  border-bottom:1px solid #4b484d;
-  padding-bottom:15px;
-  margin-bottom:20px;
-}
-
-.verdict-title h2{
-  font-family:"Playfair Display",Georgia,serif;
-  font-size:30px;
-  margin:0;
-}
-
-.verdict-title p{
-  font-size:10px;
-  line-height:1.5;
-  color:#bdb8b1;
-  margin:0;
-  text-align:right;
-}
-
-/* Bandos */
-
-.bands{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-.choice{
-  border:1px solid #5b565d;
-  background:#262429;
-  color:#fff;
-  padding:20px;
-  text-align:left;
-  cursor:pointer;
-  min-height:120px;
-  transition:.18s ease;
-  position:relative;
-}
-
-.choice:hover{
-  transform:translateY(-2px);
-  border-color:#aaa;
-}
-
-.choice .tag{
-  font-size:9px;
-  letter-spacing:2px;
-  font-weight:700;
-  opacity:.7;
-}
-
-.choice strong{
-  display:block;
-  font-family:"Playfair Display",Georgia,serif;
-  font-size:23px;
-  line-height:1.1;
-  margin:7px 0 6px;
-}
-
-.choice small{
-  display:block;
-  color:#c7c2ba;
-  line-height:1.45;
-  font-size:10px;
-}
-
-.choice.selected.a{
-  background:linear-gradient(
-    145deg,
-    var(--wine),
-    #4d1823
-  );
-  border-color:#c36a78;
-  box-shadow:0 0 0 2px rgba(195,106,120,.18);
-}
-
-.choice.selected.b{
-  background:linear-gradient(
-    145deg,
-    var(--navy),
-    #112b39
-  );
-  border-color:#6c9ab0;
-  box-shadow:0 0 0 2px rgba(108,154,176,.18);
-}
-
-.choice.selected:after{
-  content:"✓";
-  position:absolute;
-  right:17px;
-  top:14px;
-  font-size:20px;
-  color:#f2dfb2;
-}
-
-/* =========================================================
-   JUSTIFICACIÓN
-========================================================= */
-
-.evidence-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-top:18px;
-}
-
-.textbox label{
-  display:block;
-  font-size:9px;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  color:#c8c2bb;
-  font-weight:700;
-  margin-bottom:6px;
-}
-
-.textbox textarea{
-  width:100%;
-  min-height:115px;
-  background:#f6f1e8;
-  color:#222;
-  border:0;
-  padding:13px;
-  resize:vertical;
-  outline:none;
-  font-size:12px;
-  line-height:1.5;
-}
-
-.textbox textarea:focus{
-  box-shadow:0 0 0 2px #d9bc83;
-}
-
-/* =========================================================
-   BOTÓN
-========================================================= */
-
-.submit-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:18px;
-  border-top:1px solid #49464b;
-  margin-top:20px;
-  padding-top:17px;
-}
-
-#status{
-  font-size:10px;
-  color:#bdb8b1;
-  line-height:1.45;
-  max-width:520px;
-}
-
-.btn{
-  border:0;
-  background:#d9bc83;
-  color:#17161a;
-  padding:14px 23px;
-  font-weight:800;
-  letter-spacing:.7px;
-  cursor:pointer;
-  white-space:nowrap;
-  transition:.18s ease;
-}
-
-.btn:hover{
-  filter:brightness(1.06);
-  transform:translateY(-1px);
-}
-
-.btn:disabled{
-  opacity:.55;
-  cursor:not-allowed;
-  transform:none;
-}
-
-/* =========================================================
-   RESULTADO
-========================================================= */
-
-.result{
-  display:none;
-  margin-top:18px;
-  background:#fbf5e8;
-  border:1px solid var(--gold);
-  color:#2b2724;
-  padding:19px;
-}
-
-.result.show{
-  display:block;
-  animation:appear .35s ease;
-}
-
-.result b{
-  font-family:"Playfair Display",Georgia,serif;
-  color:var(--wine);
-  font-size:23px;
-}
-
-.result small{
-  color:#6d675f;
-}
-
-@keyframes appear{
-  from{
-    opacity:0;
-    transform:translateY(7px);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
-}
-
-/* =========================================================
-   TABLET
-========================================================= */
-
-@media(max-width:900px){
-
-  .hero{
-    min-height:570px;
-  }
-
-  .hero-copy{
-    width:52%;
-    padding:40px 30px;
-  }
-
-  .portrait-frame{
-    width:360px;
-    margin-left:25%;
-  }
-
-  .case-card{
-    right:18px;
-    top:20px;
-    width:225px;
-  }
-
-  .content{
-    padding:32px 28px 45px;
-  }
-}
-
-/* =========================================================
-   CELULAR
-========================================================= */
-
-@media(max-width:700px){
-
-  .app{
-    padding:0;
-  }
-
-  .shell{
-    box-shadow:none;
-  }
-
-  .masthead{
-    padding:11px 17px;
-    font-size:9px;
-    letter-spacing:1.5px;
-  }
-
-  .masthead .case{
-    display:none;
-  }
-
-  .hero{
-    min-height:620px;
-  }
-
-  .hero:before{
-    background:
-      linear-gradient(
-        180deg,
-        rgba(250,247,240,.98) 0%,
-        rgba(250,247,240,.92) 30%,
-        rgba(250,247,240,.20) 53%,
-        rgba(34,29,25,.20) 100%
-      );
-  }
-
-  .hero-copy{
-    width:100%;
-    padding:30px 20px 15px;
-  }
-
-  h1{
-    font-size:46px;
-    letter-spacing:-2px;
-  }
-
-  .lede{
-    font-size:12px;
-    max-width:430px;
-  }
-
-  .hero-mark{
-    align-items:flex-end;
-  }
-
-  .portrait-frame{
-    width:75vw;
-    min-width:240px;
-    margin:0 0 65px 0;
-  }
-
-  .founder-plaque{
-    bottom:-5px;
-    width:80%;
-  }
-
-  .case-card{
-    top:auto;
-    right:14px;
-    bottom:17px;
-    width:225px;
-    padding:12px 14px;
-  }
-
-  .case-card h2{
-    font-size:20px;
-  }
-
-  .case-card p{
-    font-size:10px;
-  }
-
-  .content{
-    padding:27px 17px 40px;
-  }
-
-  .section-label{
-    align-items:flex-start;
-    flex-direction:column;
-    gap:5px;
-    margin-bottom:14px;
-  }
-
-  .section-label h2{
-    font-size:24px;
-  }
-
-  .identity,
-  .criteria,
-  .scores,
-  .bands,
-  .evidence-grid{
-    grid-template-columns:1fr;
-  }
-
-  .identity{
-    padding:14px;
-    margin-bottom:28px;
-  }
-
-  .criteria{
-    gap:9px;
-    margin-bottom:29px;
-  }
-
-  .criterion{
-    min-height:auto;
-  }
-
-  .scores{
-    gap:9px;
-    margin-bottom:29px;
-  }
-
-  .verdict-wrap{
-    padding:21px 15px;
-  }
-
-  .verdict-title{
-    align-items:flex-start;
-    flex-direction:column;
-    gap:8px;
-  }
-
-  .verdict-title h2{
-    font-size:27px;
-  }
-
-  .verdict-title p{
-    text-align:left;
-  }
-
-  .choice{
-    min-height:105px;
-    padding:17px;
-  }
-
-  .choice strong{
-    font-size:22px;
-  }
-
-  .evidence-grid{
-    gap:11px;
-  }
-
-  .submit-row{
-    align-items:stretch;
-    flex-direction:column;
-  }
-
-  #status{
-    max-width:none;
-  }
-
-  .btn{
-    width:100%;
-    padding:16px;
-  }
-}
-
-/* =========================================================
-   CELULAR PEQUEÑO
-========================================================= */
-
-@media(max-width:430px){
-
-  .hero{
-    min-height:600px;
-  }
-
-  h1{
-    font-size:41px;
-  }
-
-  .portrait-frame{
-    width:72vw;
-    margin-bottom:63px;
-  }
-
-  .case-card{
-    width:205px;
-  }
-
-  .founder-plaque b{
-    font-size:15px;
-  }
-
-  .founder-plaque span{
-    font-size:11px;
-  }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Antígona · El Jurado del Directorio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #19171a;
+      --paper: #f3eee5;
+      --cream: #faf7f0;
+      --wine: #6d1f2d;
+      --wine2: #8d3040;
+      --navy: #19394b;
+      --gold: #b69255;
+      --line: #d9d0c1;
+      --muted: #716d68;
+      --white: #ffffff;
+      --shadow: 0 18px 50px rgba(25, 20, 15, .16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top, #ffffff 0, var(--paper) 45%, #e9e0d3 100%);
+      color: var(--ink);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.5;
+    }
+
+    /* ---------------- HEADER ---------------- */
+
+    .topbar {
+      background: #17191b;
+      color: white;
+      padding: 14px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .topbar-left {
+      opacity: .75;
+    }
+
+    .topbar-right {
+      color: #c7a96d;
+      font-weight: 700;
+    }
+
+    /* ---------------- HERO ---------------- */
+
+    .hero {
+      position: relative;
+      min-height: 620px;
+      overflow: hidden;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(22, 25, 27, .98) 0%,
+          rgba(22, 25, 27, .95) 42%,
+          rgba(22, 25, 27, .55) 72%,
+          rgba(22, 25, 27, .22) 100%
+        ),
+        #202326;
+      color: white;
+    }
+
+    /* Simulación discreta de madera / mesa */
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 105px;
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(70, 48, 31, .2),
+          rgba(42, 27, 18, .85)
+        );
+      border-top: 1px solid rgba(255,255,255,.08);
+      z-index: 1;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: min(1180px, calc(100% - 44px));
+      margin: 0 auto;
+      min-height: 620px;
+      display: grid;
+      grid-template-columns: 46% 54%;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .hero-copy {
+      padding: 65px 0 110px;
+    }
+
+    .case-label {
+      color: #c7a96d;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(44px, 5vw, 72px);
+      line-height: .98;
+      font-weight: 600;
+      margin: 0 0 25px;
+      max-width: 620px;
+      letter-spacing: -.025em;
+    }
+
+    .hero h1 span {
+      display: block;
+      color: #c7a96d;
+    }
+
+    .hero-lede {
+      max-width: 540px;
+      font-size: 17px;
+      line-height: 1.7;
+      color: rgba(255,255,255,.76);
+      margin: 0;
+    }
+
+    .hero-dilemma {
+      margin-top: 34px;
+      border-left: 3px solid var(--gold);
+      padding: 12px 0 12px 20px;
+    }
+
+    .hero-dilemma small {
+      display: block;
+      color: rgba(255,255,255,.52);
+      text-transform: uppercase;
+      letter-spacing: .13em;
+      font-size: 10px;
+      margin-bottom: 5px;
+    }
+
+    .hero-dilemma strong {
+      font-family: "Playfair Display", serif;
+      font-size: 25px;
+      font-weight: 500;
+    }
+
+    /* ---------------- RETRATO ---------------- */
+
+    .portrait-area {
+      height: 100%;
+      min-height: 570px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 35px 25px 110px;
+      position: relative;
+    }
+
+    .portrait-frame {
+      position: relative;
+      width: min(390px, 82%);
+      height: 485px;
+      background: #111;
+      padding: 12px;
+      box-shadow:
+        0 28px 65px rgba(0,0,0,.45),
+        0 5px 15px rgba(0,0,0,.25);
+      border: 1px solid rgba(198,169,109,.7);
+    }
+
+    .portrait-frame::before {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border: 1px solid rgba(198,169,109,.3);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .portrait-frame img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      background: #202020;
+    }
+
+    .portrait-caption {
+      position: absolute;
+      bottom: 73px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+      background: rgba(20,20,20,.92);
+      border: 1px solid rgba(198,169,109,.6);
+      padding: 10px 19px;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .portrait-caption strong {
+      display: block;
+      font-family: "Playfair Display", serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: white;
+    }
+
+    .portrait-caption span {
+      display: block;
+      font-size: 9px;
+      color: #c7a96d;
+      text-transform: uppercase;
+      letter-spacing: .15em;
+      margin-top: 2px;
+    }
+
+    /* ---------------- MAIN ---------------- */
+
+    main {
+      width: min(1080px, calc(100% - 36px));
+      margin: -25px auto 80px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .section {
+      background: var(--cream);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+    }
+
+    .section-header {
+      padding: 23px 30px 20px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: baseline;
+      gap: 15px;
+    }
+
+    .section-number {
+      color: var(--wine);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: .15em;
+    }
+
+    .section-title {
+      font-family: "Playfair Display", serif;
+      font-size: 25px;
+      margin: 0;
+      font-weight: 600;
+    }
+
+    .section-body {
+      padding: 28px 30px;
+    }
+
+    /* ---------------- DATOS ---------------- */
+
+    .identity-grid {
+      display: grid;
+      grid-template-columns: 1fr 230px;
+      gap: 24px;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 8px;
+      color: #494541;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid #cfc5b6;
+      background: white;
+      color: var(--ink);
+      border-radius: 2px;
+      font: inherit;
+      padding: 13px 14px;
+      outline: none;
+      transition: border .2s, box-shadow .2s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--wine);
+      box-shadow: 0 0 0 3px rgba(109,31,45,.08);
+    }
+
+    /* ---------------- CRITERIOS ---------------- */
+
+    .criteria {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .criterion {
+      border: 1px solid var(--line);
+      background: white;
+      padding: 22px;
+    }
+
+    .criterion h3 {
+      font-family: "Playfair Display", serif;
+      font-size: 21px;
+      margin: 0 0 9px;
+    }
+
+    .criterion p {
+      color: var(--muted);
+      font-size: 13px;
+      min-height: 58px;
+      margin: 0 0 22px;
+    }
+
+    .score-line {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    input[type="range"] {
+      padding: 0;
+      accent-color: var(--wine);
+    }
+
+    .score-value {
+      min-width: 30px;
+      text-align: center;
+      font-weight: 700;
+      color: var(--wine);
+      font-size: 18px;
+    }
+
+    /* ---------------- VEREDICTO ---------------- */
+
+    .verdict-intro {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 28px;
+    }
+
+    .verdict-intro h3 {
+      font-family: "Playfair Display", serif;
+      font-size: 30px;
+      margin: 0 0 7px;
+    }
+
+    .verdict-intro p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .choices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      max-width: 850px;
+      margin: 0 auto 30px;
+    }
+
+    .choice {
+      cursor: pointer;
+      border: 1px solid #cfc5b6;
+      background: white;
+      padding: 26px 25px;
+      text-align: left;
+      transition: .2s ease;
+    }
+
+    .choice:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0,0,0,.08);
+    }
+
+    .choice.selected {
+      border: 2px solid var(--wine);
+      background: #f9eef0;
+      box-shadow: 0 12px 28px rgba(109,31,45,.12);
+    }
+
+    .choice-tag {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .15em;
+      color: var(--wine);
+      margin-bottom: 8px;
+    }
+
+    .choice h4 {
+      font-family: "Playfair Display", serif;
+      font-size: 23px;
+      margin: 0 0 7px;
+    }
+
+    .choice p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .choice.selected .choice-tag {
+      color: var(--wine);
+    }
+
+    .status {
+      text-align: center;
+      min-height: 22px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      color: var(--wine);
+      font-weight: 600;
+    }
+
+    .text-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-bottom: 25px;
+    }
+
+    textarea {
+      min-height: 145px;
+      resize: vertical;
+    }
+
+    .submit-wrap {
+      text-align: center;
+      padding-top: 5px;
+    }
+
+    .btn {
+      border: none;
+      background: var(--wine);
+      color: white;
+      padding: 16px 34px;
+      font: inherit;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: .2s;
+      box-shadow: 0 10px 25px rgba(109,31,45,.22);
+    }
+
+    .btn:hover {
+      background: var(--wine2);
+      transform: translateY(-1px);
+    }
+
+    .btn:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .result {
+      display: none;
+      margin-top: 25px;
+      padding: 22px;
+      background: #eee7da;
+      border: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .result.show {
+      display: block;
+    }
+
+    /* ---------------- FOOTER ---------------- */
+
+    footer {
+      text-align: center;
+      color: #817a72;
+      font-size: 11px;
+      padding: 0 20px 45px;
+      letter-spacing: .04em;
+    }
+
+    /* ---------------- MOBILE ---------------- */
+
+    @media (max-width: 800px) {
+
+      .topbar {
+        padding: 12px 18px;
+      }
+
+      .topbar-right {
+        display: none;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-inner {
+        width: 100%;
+        min-height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .hero-copy {
+        width: calc(100% - 36px);
+        padding: 45px 0 25px;
+      }
+
+      .hero h1 {
+        font-size: 45px;
+      }
+
+      .hero-lede {
+        font-size: 15px;
+      }
+
+      .portrait-area {
+        min-height: auto;
+        width: 100%;
+        padding: 15px 0 100px;
+      }
+
+      .portrait-frame {
+        width: min(350px, 82vw);
+        height: 440px;
+      }
+
+      .portrait-caption {
+        bottom: 65px;
+      }
+
+      main {
+        width: calc(100% - 22px);
+        margin-top: -18px;
+      }
+
+      .section-header {
+        padding: 20px;
+      }
+
+      .section-body {
+        padding: 22px 18px;
+      }
+
+      .identity-grid,
+      .criteria,
+      .choices,
+      .text-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .criterion p {
+        min-height: auto;
+      }
+
+      .choice {
+        padding: 22px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="app">
-<main class="shell">
-
-<!-- =====================================================
-     CABECERA
-===================================================== -->
-
-<header class="masthead">
-  <div><b>DIRECTORIO</b> · SESIÓN EXTRAORDINARIA</div>
-  <div class="case">ANTÍGONA · CASO 01</div>
-</header>
-
-
-<!-- =====================================================
-     HERO
-===================================================== -->
-
-<section class="hero">
-
-  <div class="office-line"></div>
-
-  <div class="hero-copy">
-
-    <div class="eyebrow">
-      Sesión extraordinaria del directorio · Caso 01
+  <header class="topbar">
+    <div class="topbar-left">
+      Directorio · Sesión extraordinaria
     </div>
 
-    <h1>
-      Antígona:<br>
-      <em>el funeral del CEO</em>
-    </h1>
-
-    <p class="lede">
-      El fundador ha muerto. Dejó una última voluntad:
-      <b>sus acciones deben ser enterradas con él</b>.
-      Ahora el directorio debe decidir entre respetar su legado
-      o preservar el futuro de la empresa.
-    </p>
-
-  </div>
-
-
-  <div class="hero-mark">
-
-    <div class="portrait-frame">
-
-      <img
-        src="fundador.jpeg"
-        alt="Retrato del fundador"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
-      >
-
-      <div
-        class="portrait-fallback"
-        style="display:none;"
-      >
-        F
-      </div>
-
-      <div class="founder-plaque">
-        <b>FUNDADOR</b>
-        <span>1944 — 2026</span>
-      </div>
-
+    <div class="topbar-right">
+      Antígona · Caso 01
     </div>
+  </header>
 
 
-    <div class="case-card">
+  <!-- HERO -->
 
-      <span class="case-no">01</span>
+  <section class="hero">
 
-      <div class="label">
-        El conflicto
-      </div>
+    <div class="hero-inner">
 
-      <h2>
-        Su legado<br>
-        o la empresa
-      </h2>
+      <div class="hero-copy">
 
-      <p>
-        El directorio escucha. Tú actúas como jurado
-        y decides qué bando defendió mejor su posición.
-      </p>
+        <div class="case-label">
+          El caso del fundador
+        </div>
 
-    </div>
+        <h1>
+          Antígona:
+          <span>el funeral del CEO</span>
+        </h1>
 
-  </div>
+        <p class="hero-lede">
+          El fundador de la compañía ha muerto. En su testamento
+          dejó una última voluntad que enfrenta al directorio con una
+          decisión difícil: ¿debe respetarse su legado aunque eso
+          comprometa el futuro de la empresa?
+        </p>
 
-</section>
-
-
-<!-- =====================================================
-     CONTENIDO
-===================================================== -->
-
-<div class="content">
-
-
-  <!-- IDENTIFICACIÓN -->
-
-  <div class="section-label">
-    <h2>Antes de deliberar</h2>
-    <span>Identifica tu evaluación</span>
-  </div>
-
-
-  <div class="identity">
-
-    <div class="field">
-
-      <label for="student">
-        Nombre del estudiante
-      </label>
-
-      <input
-        id="student"
-        maxlength="100"
-        autocomplete="name"
-        placeholder="Nombre y apellido"
-      >
-
-    </div>
-
-
-    <div class="field">
-
-      <label for="presentation">
-        Presentación que estás evaluando
-      </label>
-
-      <select id="presentation">
-
-        <option value="">
-          Selecciona una presentación…
-        </option>
-
-        <option value="1">Presentación 1</option>
-        <option value="2">Presentación 2</option>
-        <option value="3">Presentación 3</option>
-        <option value="4">Presentación 4</option>
-        <option value="5">Presentación 5</option>
-        <option value="6">Presentación 6</option>
-        <option value="7">Presentación 7</option>
-        <option value="8">Presentación 8</option>
-        <option value="9">Presentación 9</option>
-        <option value="10">Presentación 10</option>
-        <option value="11">Presentación 11</option>
-        <option value="12">Presentación 12</option>
-        <option value="13">Presentación 13</option>
-        <option value="14">Presentación 14</option>
-        <option value="15">Presentación 15</option>
-        <option value="16">Presentación 16</option>
-        <option value="17">Presentación 17</option>
-        <option value="18">Presentación 18</option>
-        <option value="19">Presentación 19</option>
-        <option value="20">Presentación 20</option>
-
-      </select>
-
-    </div>
-
-  </div>
-
-
-  <!-- OBSERVACIÓN -->
-
-  <div class="section-label">
-    <h2>01 · Observa como jurado</h2>
-    <span>Registra evidencias mientras escuchas</span>
-  </div>
-
-
-  <div class="criteria">
-
-    <article class="criterion">
-
-      <div class="n">
-        CRITERIO 01
-      </div>
-
-      <h3>
-        Argumentación
-      </h3>
-
-      <p>
-        ¿Los argumentos son claros, pertinentes y convincentes?
-        Busca razones y ejemplos concretos.
-      </p>
-
-    </article>
-
-
-    <article class="criterion">
-
-      <div class="n">
-        CRITERIO 02
-      </div>
-
-      <h3>
-        Refutación
-      </h3>
-
-      <p>
-        ¿Responden realmente al adversario?
-        Identifica la intervención que mejor enfrenta una objeción.
-      </p>
-
-    </article>
-
-
-    <article class="criterion">
-
-      <div class="n">
-        CRITERIO 03
-      </div>
-
-      <h3>
-        Actuación
-      </h3>
-
-      <p>
-        Evalúa voz, ritmo, pausas, corporalidad,
-        personaje y presencia escénica.
-      </p>
-
-    </article>
-
-  </div>
-
-
-  <!-- PUNTAJES -->
-
-  <div class="section-label">
-    <h2>02 · Asigna los puntos</h2>
-    <span>1 = muy débil · 5 = excelente</span>
-  </div>
-
-
-  <div class="scores">
-
-    <div class="score">
-
-      <div class="score-top">
-        <b>Argumentación</b>
-        <span class="value" id="v1">3/5</span>
-      </div>
-
-      <input
-        id="s1"
-        type="range"
-        min="1"
-        max="5"
-        value="3"
-      >
-
-      <div class="scale">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-        <span>4</span>
-        <span>5</span>
-      </div>
-
-    </div>
-
-
-    <div class="score">
-
-      <div class="score-top">
-        <b>Refutación</b>
-        <span class="value" id="v2">3/5</span>
-      </div>
-
-      <input
-        id="s2"
-        type="range"
-        min="1"
-        max="5"
-        value="3"
-      >
-
-      <div class="scale">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-        <span>4</span>
-        <span>5</span>
-      </div>
-
-    </div>
-
-
-    <div class="score">
-
-      <div class="score-top">
-        <b>Actuación</b>
-        <span class="value" id="v3">3/5</span>
-      </div>
-
-      <input
-        id="s3"
-        type="range"
-        min="1"
-        max="5"
-        value="3"
-      >
-
-      <div class="scale">
-        <span>1</span>
-        <span>2</span>
-        <span>3</span>
-        <span>4</span>
-        <span>5</span>
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- VEREDICTO -->
-
-  <section class="verdict-wrap">
-
-    <div class="verdict-title">
-
-      <h2>
-        03 · Emite tu veredicto
-      </h2>
-
-      <p>
-        No evalúes tu opinión personal.<br>
-        Evalúa la eficacia de la defensa.
-      </p>
-
-    </div>
-
-
-    <!-- BANDOS -->
-
-    <div class="bands">
-
-      <button
-        type="button"
-        class="choice a"
-        data-band="A"
-        onclick="pick('A')"
-      >
-
-        <span class="tag">
-          BANDO A
-        </span>
-
-        <strong>
-          Cumplir la última voluntad
-        </strong>
-
-        <small>
-          La obligación de respetar la voluntad del fundador.
-        </small>
-
-      </button>
-
-
-      <button
-        type="button"
-        class="choice b"
-        data-band="B"
-        onclick="pick('B')"
-      >
-
-        <span class="tag">
-          BANDO B
-        </span>
-
-        <strong>
-          Preservar la empresa
-        </strong>
-
-        <small>
-          La necesidad de proteger la continuidad de la organización.
-        </small>
-
-      </button>
-
-    </div>
-
-
-    <!-- JUSTIFICACIÓN -->
-
-    <div class="evidence-grid">
-
-      <div class="textbox">
-
-        <label for="reason">
-          Justificación de tu decisión
-        </label>
-
-        <textarea
-          id="reason"
-          maxlength="2000"
-          placeholder="Mi decisión se basa principalmente en…"
-        ></textarea>
+        <div class="hero-dilemma">
+          <small>Decisión del directorio</small>
+          <strong>Su legado o la empresa</strong>
+        </div>
 
       </div>
 
 
-      <div class="textbox">
+      <!-- RETRATO DEL FUNDADOR -->
 
-        <label for="evidence">
-          Evidencia concreta
-        </label>
+      <div class="portrait-area">
 
-        <textarea
-          id="evidence"
-          maxlength="2000"
-          placeholder="Una intervención concreta que observé fue…"
-        ></textarea>
+        <div class="portrait-frame">
+
+          <img
+            src="fundador.jpeg"
+            alt="Retrato del fundador"
+          >
+
+        </div>
+
+        <div class="portrait-caption">
+          <strong>El fundador</strong>
+          <span>Preside esta sesión extraordinaria</span>
+        </div>
 
       </div>
-
-    </div>
-
-
-    <!-- REGISTRO -->
-
-    <div class="submit-row">
-
-      <div id="status">
-        Selecciona un bando y fundamenta tu veredicto
-        con una evidencia concreta.
-      </div>
-
-      <button
-        type="button"
-        class="btn"
-        id="submitBtn"
-        onclick="submitVote()"
-      >
-        REGISTRAR VEREDICTO →
-      </button>
 
     </div>
 
   </section>
 
 
-  <!-- RESULTADO -->
+  <main>
 
-  <div id="result" class="result"></div>
+    <!-- DATOS -->
 
+    <section class="section">
 
-</div>
+      <div class="section-header">
+        <div class="section-number">01</div>
+        <h2 class="section-title">Identificación del jurado</h2>
+      </div>
 
-</main>
-</div>
+      <div class="section-body">
 
+        <div class="identity-grid">
 
-<script>
+          <div>
+            <label for="student">
+              Nombre del estudiante
+            </label>
 
-/* =========================================================
-   ESTADO
-========================================================= */
+            <input
+              id="student"
+              type="text"
+              placeholder="Escribe tu nombre completo"
+            >
+          </div>
 
-let selected = null;
+          <div>
+            <label for="presentation">
+              Presentación evaluada
+            </label>
 
-const $ = id => document.getElementById(id);
+            <select id="presentation">
+              <option value="">Selecciona...</option>
 
+              <option value="1">Presentación 1</option>
+              <option value="2">Presentación 2</option>
+              <option value="3">Presentación 3</option>
+              <option value="4">Presentación 4</option>
+              <option value="5">Presentación 5</option>
+              <option value="6">Presentación 6</option>
+              <option value="7">Presentación 7</option>
+              <option value="8">Presentación 8</option>
+              <option value="9">Presentación 9</option>
+              <option value="10">Presentación 10</option>
+              <option value="11">Presentación 11</option>
+              <option value="12">Presentación 12</option>
+              <option value="13">Presentación 13</option>
+              <option value="14">Presentación 14</option>
+              <option value="15">Presentación 15</option>
+              <option value="16">Presentación 16</option>
+              <option value="17">Presentación 17</option>
+              <option value="18">Presentación 18</option>
+              <option value="19">Presentación 19</option>
+              <option value="20">Presentación 20</option>
 
-/* =========================================================
-   PUNTAJES
-========================================================= */
+            </select>
+          </div>
 
-['s1','s2','s3'].forEach((id,i)=>{
+        </div>
 
-  $(id).addEventListener('input', e => {
+      </div>
 
-    $('v'+(i+1)).textContent =
-      e.target.value + '/5';
+    </section>
 
-  });
 
-});
+    <!-- EVALUACIÓN -->
 
+    <section class="section">
 
-/* =========================================================
-   SELECCIÓN DE BANDO
-========================================================= */
+      <div class="section-header">
+        <div class="section-number">02</div>
+        <h2 class="section-title">Evaluación de la presentación</h2>
+      </div>
 
-function pick(x){
+      <div class="section-body">
 
-  selected = x;
+        <div class="criteria">
 
-  document
-    .querySelectorAll('.choice')
-    .forEach(b =>
-      b.classList.remove('selected')
-    );
+          <article class="criterion">
 
-  document
-    .querySelector(
-      '.choice[data-band="'+x+'"]'
-    )
-    .classList.add('selected');
+            <h3>Argumentación</h3>
 
-  $('status').textContent =
-    'Bando '+x+
-    ' seleccionado. Ahora justifica tu decisión y aporta una evidencia concreta.';
+            <p>
+              ¿La posición defendida presenta argumentos claros,
+              pertinentes y convincentes?
+            </p>
 
-}
+            <div class="score-line">
 
+              <input
+                id="s1"
+                type="range"
+                min="1"
+                max="5"
+                value="3"
+              >
 
-/* =========================================================
-   REGISTRAR VOTO
-========================================================= */
+              <div class="score-value" id="v1">3</div>
 
-async function submitVote(){
+            </div>
 
-  const student =
-    $('student').value.trim();
+          </article>
 
-  const presentation =
-    $('presentation').value;
 
-  const reason =
-    $('reason').value.trim();
+          <article class="criterion">
 
-  const evidence =
-    $('evidence').value.trim();
+            <h3>Refutación</h3>
 
+            <p>
+              ¿El equipo respondió eficazmente a los argumentos
+              y objeciones del bando contrario?
+            </p>
 
-  if(
-    !student ||
-    !presentation ||
-    !selected ||
-    !reason ||
-    !evidence
-  ){
+            <div class="score-line">
 
-    $('status').textContent =
-      'Completa tu nombre, presentación, bando, justificación y evidencia.';
+              <input
+                id="s2"
+                type="range"
+                min="1"
+                max="5"
+                value="3"
+              >
 
-    return;
+              <div class="score-value" id="v2">3</div>
 
-  }
+            </div>
 
+          </article>
 
-  if(
-    reason.length < 5 ||
-    evidence.length < 5
-  ){
 
-    $('status').textContent =
-      'La justificación y la evidencia deben ser más desarrolladas.';
+          <article class="criterion">
 
-    return;
+            <h3>Actuación</h3>
 
-  }
+            <p>
+              ¿La puesta en escena utilizó voz, presencia y
+              recursos teatrales de manera efectiva?
+            </p>
 
+            <div class="score-line">
 
-  const key =
-    'jurado-voto-' +
-    student.toLowerCase() +
-    '-' +
-    presentation;
+              <input
+                id="s3"
+                type="range"
+                min="1"
+                max="5"
+                value="3"
+              >
 
+              <div class="score-value" id="v3">3</div>
 
-  if(localStorage.getItem(key)){
+            </div>
 
-    $('status').textContent =
-      'Ya registraste un veredicto para esta presentación desde este navegador.';
+          </article>
 
-    return;
+        </div>
 
-  }
+      </div>
 
+    </section>
 
-  const btn =
-    $('submitBtn');
 
-  btn.disabled = true;
+    <!-- VEREDICTO -->
 
-  btn.textContent =
-    'GUARDANDO…';
+    <section class="section">
 
-  $('status').textContent =
-    'Registrando el veredicto…';
+      <div class="section-header">
+        <div class="section-number">03</div>
+        <h2 class="section-title">El veredicto del directorio</h2>
+      </div>
 
+      <div class="section-body">
 
-  try{
+        <div class="verdict-intro">
 
-    const response =
-      await fetch('/api/vote',{
+          <h3>
+            ¿Qué debería decidir el directorio?
+          </h3>
 
-        method:'POST',
+          <p>
+            Selecciona el bando que consideras más convincente
+            después de escuchar la presentación.
+          </p>
 
-        headers:{
-          'Content-Type':
-          'application/json'
-        },
+        </div>
 
-        body:JSON.stringify({
 
-          presentacion:
-            Number(presentation),
+        <div class="choices">
 
-          estudiante:
-            student,
+          <button
+            type="button"
+            class="choice"
+            id="choiceA"
+            onclick="pick('A')"
+          >
 
-          bando:
-            selected,
+            <div class="choice-tag">
+              Bando A
+            </div>
 
-          argumentacion:
-            Number($('s1').value),
+            <h4>
+              Cumplir la última voluntad
+            </h4>
 
-          refutacion:
-            Number($('s2').value),
+            <p>
+              La obligación de respetar la voluntad del fundador
+              y preservar su legado.
+            </p>
 
-          actuacion:
-            Number($('s3').value),
+          </button>
 
-          justificacion:
-            reason,
 
-          evidencia:
-            evidence
+          <button
+            type="button"
+            class="choice"
+            id="choiceB"
+            onclick="pick('B')"
+          >
 
-        })
+            <div class="choice-tag">
+              Bando B
+            </div>
 
-      });
+            <h4>
+              Preservar la empresa
+            </h4>
 
+            <p>
+              La necesidad de proteger la continuidad de la
+              organización y su futuro.
+            </p>
 
-    let data = {};
+          </button>
 
-    try{
-      data =
-        await response.json();
-    }
-    catch(_){}
+        </div>
 
 
-    if(
-      !response.ok ||
-      !data.ok
-    ){
+        <div
+          class="status"
+          id="status"
+        ></div>
 
-      throw new Error(
-        data.error ||
-        'No se pudo registrar el veredicto.'
-      );
 
-    }
+        <div class="text-grid">
 
+          <div>
 
-    localStorage.setItem(
-      key,
-      '1'
-    );
+            <label for="reason">
+              Justificación del veredicto
+            </label>
 
+            <textarea
+              id="reason"
+              placeholder="Explica por qué consideras más convincente la posición elegida..."
+            ></textarea>
 
-    const total =
-      Number($('s1').value) +
-      Number($('s2').value) +
-      Number($('s3').value);
+          </div>
 
 
-    const box =
-      $('result');
+          <div>
 
-    box.classList.add('show');
+            <label for="evidence">
+              Evidencia de la presentación
+            </label>
 
+            <textarea
+              id="evidence"
+              placeholder="Menciona un argumento, respuesta o recurso escénico concreto que haya influido en tu decisión..."
+            ></textarea>
 
-    box.innerHTML =
-      '<b>✓ VEREDICTO REGISTRADO</b>' +
-      '<br>' +
-      'Presentación <strong>'+
-      presentation+
-      '</strong> · ' +
-      '<strong>Bando '+
-      selected+
-      '</strong> · ' +
-      'Evaluación <strong>'+
-      total+
-      '/15</strong>' +
-      '<br>' +
-      '<small>Tu registro quedó guardado correctamente.</small>';
+          </div>
 
+        </div>
 
-    $('status').textContent =
-      'Evaluación registrada correctamente.';
 
+        <div class="submit-wrap">
 
-    document
-      .querySelectorAll(
-        'input,select,textarea,.choice,.btn'
-      )
-      .forEach(el =>
-        el.disabled = true
-      );
+          <button
+            class="btn"
+            id="submitBtn"
+            onclick="submitVote()"
+          >
+            Registrar veredicto →
+          </button>
 
+        </div>
 
-    box.scrollIntoView({
-      behavior:'smooth',
-      block:'center'
+
+        <div
+          class="result"
+          id="result"
+        ></div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+    Antígona · El Jurado del Directorio
+  </footer>
+
+
+  <script>
+
+    let selected = null;
+
+    const $ = id => document.getElementById(id);
+
+
+    /* SLIDERS */
+
+    $('s1').addEventListener('input', function () {
+      $('v1').textContent = this.value;
+    });
+
+    $('s2').addEventListener('input', function () {
+      $('v2').textContent = this.value;
+    });
+
+    $('s3').addEventListener('input', function () {
+      $('v3').textContent = this.value;
     });
 
 
-  }
-  catch(err){
+    /* ELECCIÓN DEL BANDO */
 
-    $('status').textContent =
-      'No se pudo guardar: ' +
-      err.message;
+    function pick(x) {
 
-    btn.disabled = false;
+      selected = x;
 
-    btn.textContent =
-      'REGISTRAR VEREDICTO →';
+      $('choiceA').classList.toggle(
+        'selected',
+        x === 'A'
+      );
 
-  }
+      $('choiceB').classList.toggle(
+        'selected',
+        x === 'B'
+      );
 
-}
+      $('status').textContent =
+        x === 'A'
+          ? 'Has elegido el Bando A: cumplir la última voluntad.'
+          : 'Has elegido el Bando B: preservar la empresa.';
+    }
 
-</script>
+
+    /* ENVÍO */
+
+    async function submitVote() {
+
+      const student =
+        $('student').value.trim();
+
+      const presentation =
+        $('presentation').value;
+
+      const reason =
+        $('reason').value.trim();
+
+      const evidence =
+        $('evidence').value.trim();
+
+      const btn =
+        $('submitBtn');
+
+
+      if (!student) {
+
+        alert('Escribe tu nombre antes de registrar el veredicto.');
+
+        $('student').focus();
+
+        return;
+      }
+
+
+      if (!presentation) {
+
+        alert('Selecciona la presentación que estás evaluando.');
+
+        $('presentation').focus();
+
+        return;
+      }
+
+
+      if (!selected) {
+
+        alert('Debes elegir un bando antes de registrar el veredicto.');
+
+        return;
+      }
+
+
+      if (reason.length < 5) {
+
+        alert('Escribe una justificación para tu decisión.');
+
+        $('reason').focus();
+
+        return;
+      }
+
+
+      if (evidence.length < 5) {
+
+        alert('Indica alguna evidencia concreta de la presentación.');
+
+        $('evidence').focus();
+
+        return;
+      }
+
+
+      /* EVITAR VOTO DUPLICADO */
+
+      const storageKey =
+        'jurado-voto-' +
+        student.toLowerCase() +
+        '-' +
+        presentation;
+
+
+      if (localStorage.getItem(storageKey)) {
+
+        alert(
+          'Ya registraste un veredicto para esta presentación.'
+        );
+
+        return;
+      }
+
+
+      const payload = {
+
+        presentacion: Number(presentation),
+
+        estudiante: student,
+
+        bando: selected,
+
+        argumentacion:
+          Number($('s1').value),
+
+        refutacion:
+          Number($('s2').value),
+
+        actuacion:
+          Number($('s3').value),
+
+        justificacion:
+          reason,
+
+        evidencia:
+          evidence
+
+      };
+
+
+      btn.disabled = true;
+
+      btn.textContent =
+        'Registrando veredicto...';
+
+
+      try {
+
+        const response =
+          await fetch('/api/vote', {
+
+            method: 'POST',
+
+            headers: {
+              'Content-Type':
+                'application/json'
+            },
+
+            body:
+              JSON.stringify(payload)
+
+          });
+
+
+        const data =
+          await response.json();
+
+
+        if (!response.ok || !data.ok) {
+
+          throw new Error(
+            data.message ||
+            'No fue posible registrar el veredicto.'
+          );
+
+        }
+
+
+        localStorage.setItem(
+          storageKey,
+          '1'
+        );
+
+
+        const total =
+          Number($('s1').value) +
+          Number($('s2').value) +
+          Number($('s3').value);
+
+
+        const result =
+          $('result');
+
+
+        result.innerHTML = `
+          <strong>Veredicto registrado correctamente.</strong>
+          <br><br>
+          Has evaluado la presentación
+          <strong>${presentation}</strong>
+          y has elegido el
+          <strong>Bando ${selected}</strong>.
+          <br>
+          Puntuación de la presentación:
+          <strong>${total}/15</strong>
+        `;
+
+
+        result.classList.add('show');
+
+
+        document
+          .querySelectorAll(
+            'input, select, textarea, .choice, .btn'
+          )
+          .forEach(el => {
+            el.disabled = true;
+          });
+
+
+        result.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+
+
+      } catch (error) {
+
+        console.error(error);
+
+        alert(
+          error.message ||
+          'Ocurrió un error al registrar el veredicto.'
+        );
+
+        btn.disabled = false;
+
+        btn.textContent =
+          'Registrar veredicto →';
+
+      }
+
+    }
+
+  </script>
 
 </body>
 </html>
