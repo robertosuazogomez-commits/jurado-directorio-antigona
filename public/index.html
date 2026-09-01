@@ -99,7 +99,7 @@ input[type=range]{width:100%;accent-color:var(--wine);margin:19px 0 8px;height:2
   <div class="hero-copy">
     <div class="eyebrow">El funeral del CEO</div>
     <h1>El jurado<br>del <em>directorio</em></h1>
-    <p class="lede">La empresa debe decidir entre <b>cumplir la última voluntad del fundador</b> o <b>preservar la empresa</b>. Tu tarea es decidir <b>qué bando logró convencerte mejor</b>, considerando la calidad de sus argumentos y cómo respondió al bando contrario.</p>
+    <p class="lede">La empresa debe decidir entre <b>cumplir la última voluntad del fundador</b> o <b>preservar la empresa</b>. Tu tarea no es decidir quién tiene razón: debes determinar <b>quién defendió mejor su posición</b>.</p>
   </div>
   <div class="hero-mark">
     <div class="case-card"><span class="case-no">01</span><div class="label">Expediente</div><h2>Antígona</h2><p>Una decisión de principios frente a una decisión de supervivencia corporativa. El directorio escucha. Tú dictas el veredicto.</p></div>
@@ -122,9 +122,9 @@ input[type=range]{width:100%;accent-color:var(--wine);margin:19px 0 8px;height:2
 
   <div class="section-label"><h2>01 · Observa como jurado</h2><span>Registra evidencias mientras escuchas</span></div>
   <div class="criteria">
-    <article class="criterion"><div class="n">CRITERIO 01</div><h3>Argumentación</h3><p>¿Qué tan sólidos, claros y convincentes fueron los argumentos del bando? Busca razones y ejemplos concretos.</p></article>
-    <article class="criterion"><div class="n">CRITERIO 02</div><h3>Refutación</h3><p>¿El bando logró responder y refutar los argumentos del contrario? Identifica la intervención más convincente.</p></article>
-    <article class="criterion"><div class="n">CRITERIO 03</div><h3>Actuación</h3><p>Considera voz, ritmo, pausas, corporalidad, personaje y presencia escénica al defender sus argumentos.</p></article>
+    <article class="criterion"><div class="n">CRITERIO 01</div><h3>Argumentación</h3><p>¿Los argumentos son claros, pertinentes y convincentes? Busca razones y ejemplos concretos.</p></article>
+    <article class="criterion"><div class="n">CRITERIO 02</div><h3>Refutación</h3><p>¿Responden realmente al adversario? Identifica la intervención que mejor enfrenta una objeción.</p></article>
+    <article class="criterion"><div class="n">CRITERIO 03</div><h3>Actuación</h3><p>Evalúa voz, ritmo, pausas, corporalidad, personaje y presencia escénica.</p></article>
   </div>
 
   <div class="section-label"><h2>02 · Asigna los puntos</h2><span>1 = muy débil · 5 = excelente</span></div>
@@ -135,16 +135,16 @@ input[type=range]{width:100%;accent-color:var(--wine);margin:19px 0 8px;height:2
   </div>
 
   <section class="verdict-wrap">
-    <div class="verdict-title"><h2>03 · Emite tu veredicto</h2><p>Vota por el bando que te convenció mejor.<br>Tu decisión debe basarse en la calidad de sus argumentos.</p></div>
+    <div class="verdict-title"><h2>03 · Emite tu veredicto</h2><p>No evalúes tu opinión personal.<br>Evalúa la eficacia de la defensa.</p></div>
     <div class="bands">
       <button type="button" class="choice a" data-band="A" onclick="pick('A')"><span class="tag">BANDO A</span><strong>Cumplir la última voluntad</strong><small>La obligación de respetar la voluntad del fundador.</small></button>
       <button type="button" class="choice b" data-band="B" onclick="pick('B')"><span class="tag">BANDO B</span><strong>Preservar la empresa</strong><small>La necesidad de proteger la continuidad de la organización.</small></button>
     </div>
     <div class="evidence-grid">
-      <div class="textbox"><label for="reason">Justificación de tu decisión</label><textarea id="reason" maxlength="2000" placeholder="El bando que me convenció mejor fue este porque…"></textarea></div>
-      <div class="textbox"><label for="evidence">Evidencia concreta</label><textarea id="evidence" maxlength="2000" placeholder="Un argumento o intervención que me convenció fue…"></textarea></div>
+      <div class="textbox"><label for="reason">Justificación de tu decisión</label><textarea id="reason" maxlength="2000" placeholder="Mi decisión se basa principalmente en…"></textarea></div>
+      <div class="textbox"><label for="evidence">Evidencia concreta</label><textarea id="evidence" maxlength="2000" placeholder="Una intervención concreta que observé fue…"></textarea></div>
     </div>
-    <div class="submit-row"><div id="status">Selecciona el bando que te convenció mejor y fundamenta tu decisión con una evidencia concreta.</div><button type="button" class="btn" id="submitBtn" onclick="submitVote()">REGISTRAR VEREDICTO →</button></div>
+    <div class="submit-row"><div id="status">Selecciona un bando y fundamenta tu veredicto con una evidencia concreta.</div><button type="button" class="btn" id="submitBtn" onclick="submitVote()">REGISTRAR VEREDICTO →</button></div>
   </section>
   <div id="result" class="result"></div>
 </div>
@@ -162,7 +162,7 @@ function pick(x){
   selected = x;
   document.querySelectorAll('.choice').forEach(b => b.classList.remove('selected'));
   document.querySelector('.choice[data-band="'+x+'"]').classList.add('selected');
-  $('status').textContent = 'Bando '+x+' seleccionado. Explica por qué sus argumentos te convencieron más y aporta una evidencia concreta.';
+  $('status').textContent = 'Bando '+x+' seleccionado. Ahora justifica tu decisión y aporta una evidencia concreta.';
 }
 
 async function submitVote(){
