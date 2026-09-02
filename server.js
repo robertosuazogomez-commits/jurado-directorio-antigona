@@ -393,6 +393,117 @@ app.post('/api/vote', async (req, res) => {
 
 
 /* =========================================================
+   RESETEAR VOTACIÓN
+========================================================= */
+
+app.post('/api/votes/reset', async (_req, res) => {
+
+  if (!SUPABASE_URL || !SUPABASE_KEY) {
+
+    return res.status(500).json({
+      ok: false,
+      error:
+        'Supabase no está configurado en Render.'
+    });
+
+  }
+
+  try {
+
+    /*
+     * Borra todos los registros de la tabla votaciones.
+     *
+     * La condición id=not.is.null permite que PostgREST
+     * interprete la operación como un DELETE de todos
+     * los registros.
+     */
+
+    const response = await fetch(
+      `${SUPABASE_URL}/rest/v1/votaciones?id=not.is.null`,
+      {
+        method: 'DELETE',
+
+        headers: {
+          apikey: SUPABASE_KEY,
+          Authorization:
+            `Bearer ${SUPABASE_KEY}`,
+
+          Prefer:
+            'return=minimal'
+        }
+      }
+    );
+
+
+    const text =
+      await response.text();
+
+
+    if (!response.ok) {
+
+      console.error(
+        'ERROR SUPABASE RESET:',
+        response.status,
+        text
+      );
+
+
+      return res.status(502).json({
+
+        ok: false,
+
+        error:
+          'Supabase rechazó el reseteo de la votación.',
+
+        details:
+          text
+
+      });
+
+    }
+
+
+    console.log(
+      'VOTACIÓN RESETEADA CORRECTAMENTE'
+    );
+
+
+    return res.json({
+
+      ok: true,
+
+      message:
+        'Todas las votaciones fueron eliminadas.'
+
+    });
+
+
+  } catch (error) {
+
+    console.error(
+      'ERROR DE CONEXIÓN DURANTE RESET:',
+      error
+    );
+
+
+    return res.status(502).json({
+
+      ok: false,
+
+      error:
+        'Error de conexión con Supabase.',
+
+      details:
+        error.message
+
+    });
+
+  }
+
+});
+
+
+/* =========================================================
    SERVIR LA APLICACIÓN
 ========================================================= */
 
