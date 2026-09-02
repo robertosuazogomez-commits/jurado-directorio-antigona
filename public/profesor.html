@@ -4,40 +4,1167 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Profesor · Jurado del Directorio</title>
+
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap');
-:root{--ink:#19171a;--paper:#f3eee5;--cream:#faf7f0;--wine:#6d1f2d;--navy:#19394b;--gold:#b69255;--line:#d9d0c1;--muted:#716d68}
-*{box-sizing:border-box}body{margin:0;background:#252327;color:var(--ink);font-family:"DM Sans",system-ui,sans-serif}.app{max-width:1280px;margin:auto;padding:18px}.shell{background:var(--paper);min-height:100vh}.top{background:var(--ink);color:#f8f3e9;padding:18px 28px;display:flex;justify-content:space-between;align-items:center;gap:20px}.top .ey{font-size:10px;letter-spacing:2px;color:#d9bc83;text-transform:uppercase}.top h1{font:700 32px/1 "Playfair Display",Georgia,serif;margin:6px 0 0}.top a{color:#f8f3e9;text-decoration:none;border:1px solid #666;padding:10px 14px;font-size:11px}.content{padding:28px}.hero{display:flex;justify-content:space-between;gap:20px;align-items:end;border-bottom:1px solid var(--ink);padding-bottom:16px;margin-bottom:20px}.hero h2{font:700 34px/1 "Playfair Display",Georgia,serif;margin:0}.hero p{color:var(--muted);font-size:12px;margin:7px 0 0}.actions{display:flex;gap:9px;flex-wrap:wrap}.btn,select{border:1px solid var(--ink);background:var(--cream);padding:11px 14px;font:600 11px "DM Sans";cursor:pointer}.btn.primary{background:var(--ink);color:#fff}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}.card{background:var(--cream);border:1px solid var(--line);padding:18px}.card span{display:block;text-transform:uppercase;letter-spacing:1.4px;font-size:9px;color:var(--muted)}.card strong{display:block;font:700 30px "Playfair Display";margin-top:5px}.card.wine strong{color:var(--wine)}.card.navy strong{color:var(--navy)}.table-wrap{background:#fffdf8;border:1px solid var(--line);overflow:auto}.table-head{padding:15px 18px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}.table-head strong{font:700 20px "Playfair Display"}.table-head span{font-size:11px;color:var(--muted)}table{border-collapse:collapse;width:100%;min-width:1050px}th,td{padding:12px 13px;border-bottom:1px solid #e7dfd3;text-align:left;vertical-align:top;font-size:11px}th{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);background:#f6f0e7;position:sticky;top:0}td.small{white-space:nowrap;color:#5d5954}.band{display:inline-block;padding:5px 8px;font-weight:800;font-size:9px;letter-spacing:1px;color:white}.band.A{background:var(--wine)}.band.B{background:var(--navy)}.score{font-weight:800;font-size:13px}.empty{padding:35px;text-align:center;color:var(--muted)}.error{display:none;background:#f7e6e5;border:1px solid #b56b6b;padding:14px;margin-bottom:18px;font-size:12px}.error.show{display:block}.summary{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0}.barbox{background:var(--cream);border:1px solid var(--line);padding:16px}.barline{height:12px;background:#ddd4c8;margin-top:8px}.bar{height:100%;transition:.3s}.bar.a{background:var(--wine)}.bar.b{background:var(--navy)}@media(max-width:800px){.cards{grid-template-columns:1fr 1fr}.hero{align-items:start;flex-direction:column}.content{padding:18px}.top{padding:15px}.top h1{font-size:25px}}
+
+:root{
+  --ink:#19171a;
+  --paper:#eee7da;
+  --cream:#faf7f0;
+  --white:#fffdf8;
+  --wine:#6d1f2d;
+  --wine-dark:#4e1722;
+  --navy:#19394b;
+  --navy-dark:#102b39;
+  --gold:#b69255;
+  --gold-light:#d7c08e;
+  --line:#d8cfc0;
+  --muted:#716d68;
+  --shadow:0 18px 45px rgba(25,23,26,.13);
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at top left,#39343a 0,#252327 38%,#1c1a1d 100%);
+  color:var(--ink);
+  font-family:"DM Sans",system-ui,sans-serif;
+}
+
+.app{
+  max-width:1380px;
+  margin:auto;
+  padding:22px;
+}
+
+.shell{
+  background:var(--paper);
+  min-height:100vh;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+
+/* =========================
+   CABECERA
+========================= */
+
+.top{
+  min-height:285px;
+  background:
+    linear-gradient(100deg,rgba(25,23,26,.98) 0%,rgba(25,23,26,.94) 58%,rgba(25,23,26,.72) 100%);
+  color:#f8f3e9;
+  display:grid;
+  grid-template-columns:1fr 330px;
+  gap:30px;
+  padding:34px 42px 28px;
+  position:relative;
+  overflow:hidden;
+}
+
+.top:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,transparent 0 70%,rgba(182,146,85,.08) 100%);
+  pointer-events:none;
+}
+
+.top-left{
+  position:relative;
+  z-index:2;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+
+.ey{
+  font-size:10px;
+  letter-spacing:3px;
+  color:var(--gold-light);
+  text-transform:uppercase;
+  font-weight:700;
+}
+
+.top h1{
+  font:700 42px/.98 "Playfair Display",Georgia,serif;
+  margin:9px 0 13px;
+  max-width:720px;
+}
+
+.subtitle{
+  color:#cfc8bd;
+  font-size:12px;
+  line-height:1.6;
+  max-width:620px;
+}
+
+.gold-rule{
+  width:90px;
+  height:2px;
+  background:var(--gold);
+  margin:17px 0 0;
+}
+
+.top-right{
+  position:relative;
+  z-index:2;
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+}
+
+.founder{
+  width:245px;
+  height:245px;
+  background:#d8d0c4;
+  border:1px solid rgba(215,192,142,.7);
+  padding:9px;
+  box-shadow:0 15px 35px rgba(0,0,0,.35);
+  position:relative;
+}
+
+.founder:before{
+  content:"";
+  position:absolute;
+  inset:5px;
+  border:1px solid rgba(182,146,85,.65);
+  pointer-events:none;
+  z-index:2;
+}
+
+.founder img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center;
+  background:#ddd5c9;
+}
+
+.founder-label{
+  position:absolute;
+  bottom:18px;
+  left:18px;
+  right:18px;
+  background:rgba(25,23,26,.88);
+  color:#f8f3e9;
+  padding:7px 9px;
+  text-align:center;
+  font-size:8px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  z-index:3;
+}
+
+/* =========================
+   BARRA SUPERIOR
+========================= */
+
+.navline{
+  background:var(--ink);
+  border-top:1px solid #383438;
+  padding:12px 42px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+.navline-label{
+  color:#aaa39b;
+  font-size:10px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+}
+
+.navline a{
+  color:#f8f3e9;
+  text-decoration:none;
+  border:1px solid #656066;
+  padding:9px 13px;
+  font-size:10px;
+  font-weight:700;
+  transition:.2s;
+}
+
+.navline a:hover{
+  background:#f8f3e9;
+  color:var(--ink);
+}
+
+/* =========================
+   CONTENIDO
+========================= */
+
+.content{
+  padding:32px 42px 45px;
+}
+
+.hero{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:25px;
+  border-bottom:1px solid var(--ink);
+  padding-bottom:18px;
+  margin-bottom:22px;
+}
+
+.hero h2{
+  font:700 35px/1 "Playfair Display",Georgia,serif;
+  margin:0;
+}
+
+.hero p{
+  color:var(--muted);
+  font-size:12px;
+  margin:8px 0 0;
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+
+.btn,
+select{
+  border:1px solid var(--ink);
+  background:var(--cream);
+  color:var(--ink);
+  padding:11px 14px;
+  font:600 11px "DM Sans";
+  cursor:pointer;
+  transition:.2s;
+}
+
+.btn:hover,
+select:hover{
+  transform:translateY(-1px);
+  box-shadow:0 4px 10px rgba(0,0,0,.08);
+}
+
+.btn.primary{
+  background:var(--ink);
+  color:#fff;
+}
+
+.btn.primary:hover{
+  background:#302c31;
+}
+
+/* =========================
+   ERROR
+========================= */
+
+.error{
+  display:none;
+  background:#f7e6e5;
+  border:1px solid #b56b6b;
+  color:#5c2222;
+  padding:14px 16px;
+  margin-bottom:20px;
+  font-size:12px;
+}
+
+.error.show{
+  display:block;
+}
+
+/* =========================
+   TARJETAS
+========================= */
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.card{
+  background:var(--cream);
+  border:1px solid var(--line);
+  padding:19px 20px;
+  position:relative;
+  overflow:hidden;
+}
+
+.card:after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:3px;
+  background:var(--gold);
+  opacity:.7;
+}
+
+.card.wine:after{
+  background:var(--wine);
+}
+
+.card.navy:after{
+  background:var(--navy);
+}
+
+.card span{
+  display:block;
+  text-transform:uppercase;
+  letter-spacing:1.6px;
+  font-size:9px;
+  color:var(--muted);
+  font-weight:700;
+}
+
+.card strong{
+  display:block;
+  font:700 31px "Playfair Display",Georgia,serif;
+  margin-top:5px;
+}
+
+.card.wine strong{
+  color:var(--wine);
+}
+
+.card.navy strong{
+  color:var(--navy);
+}
+
+/* =========================
+   RESUMEN
+========================= */
+
+.summary{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin:0 0 25px;
+}
+
+.barbox{
+  background:var(--cream);
+  border:1px solid var(--line);
+  padding:17px 18px;
+}
+
+.bar-header{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.percent{
+  color:var(--muted);
+}
+
+.barline{
+  height:12px;
+  background:#ddd4c8;
+  margin-top:10px;
+  overflow:hidden;
+}
+
+.bar{
+  height:100%;
+  transition:.4s ease;
+  width:0;
+}
+
+.bar.a{
+  background:var(--wine);
+}
+
+.bar.b{
+  background:var(--navy);
+}
+
+/* =========================
+   TABLA
+========================= */
+
+.table-wrap{
+  background:var(--white);
+  border:1px solid var(--line);
+  overflow:hidden;
+}
+
+.table-head{
+  padding:17px 19px;
+  border-bottom:1px solid var(--line);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  background:var(--cream);
+}
+
+.table-head strong{
+  font:700 21px "Playfair Display",Georgia,serif;
+}
+
+.table-head span{
+  font-size:10px;
+  color:var(--muted);
+}
+
+.table-scroll{
+  overflow:auto;
+}
+
+table{
+  border-collapse:collapse;
+  width:100%;
+  min-width:1100px;
+}
+
+th,
+td{
+  padding:12px 13px;
+  border-bottom:1px solid #e7dfd3;
+  text-align:left;
+  vertical-align:top;
+  font-size:11px;
+}
+
+th{
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  color:var(--muted);
+  background:#f6f0e7;
+  position:sticky;
+  top:0;
+  z-index:2;
+}
+
+tbody tr:hover{
+  background:#faf6ee;
+}
+
+td.small{
+  white-space:nowrap;
+  color:#5d5954;
+}
+
+.student{
+  font-weight:700;
+}
+
+.band{
+  display:inline-block;
+  padding:5px 8px;
+  font-weight:800;
+  font-size:9px;
+  letter-spacing:1px;
+  color:white;
+}
+
+.band.A{
+  background:var(--wine);
+}
+
+.band.B{
+  background:var(--navy);
+}
+
+.score{
+  font-weight:800;
+  font-size:13px;
+  white-space:nowrap;
+}
+
+.justification,
+.evidence{
+  max-width:250px;
+  line-height:1.45;
+}
+
+.empty{
+  padding:40px 20px;
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+}
+
+/* =========================
+   PIE
+========================= */
+
+.section-caption{
+  margin:27px 0 10px;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  color:var(--muted);
+  font-weight:700;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:950px){
+
+  .top{
+    grid-template-columns:1fr;
+    min-height:auto;
+    padding:28px;
+  }
+
+  .top-right{
+    justify-content:flex-start;
+  }
+
+  .founder{
+    width:210px;
+    height:210px;
+  }
+
+  .top h1{
+    font-size:35px;
+  }
+
+  .content{
+    padding:25px;
+  }
+
+  .cards{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media(max-width:700px){
+
+  .app{
+    padding:0;
+  }
+
+  .shell{
+    box-shadow:none;
+  }
+
+  .top{
+    padding:24px 20px;
+  }
+
+  .navline{
+    padding:11px 20px;
+  }
+
+  .content{
+    padding:20px;
+  }
+
+  .hero{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .actions{
+    justify-content:flex-start;
+  }
+
+  .cards{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .summary{
+    grid-template-columns:1fr;
+  }
+
+  .top h1{
+    font-size:30px;
+  }
+}
+
+@media(max-width:480px){
+
+  .cards{
+    grid-template-columns:1fr;
+  }
+
+  .hero h2{
+    font-size:29px;
+  }
+
+  .founder{
+    width:185px;
+    height:185px;
+  }
+
+  .actions{
+    width:100%;
+  }
+
+  .actions select,
+  .actions button{
+    flex:1;
+  }
+}
 </style>
 </head>
-<body><div class="app"><div class="shell">
-<header class="top"><div><div class="ey">Panel de profesor · Registro de veredictos</div><h1>Antígona · El Jurado del Directorio</h1></div><a href="/">← Vista estudiante</a></header>
+
+<body>
+
+<div class="app">
+<div class="shell">
+
+<!-- =========================
+     CABECERA INSTITUCIONAL
+========================= -->
+
+<header class="top">
+
+  <div class="top-left">
+    <div class="ey">Panel de profesor · Registro de veredictos</div>
+
+    <h1>Antígona ·<br>El Jurado del Directorio</h1>
+
+    <div class="subtitle">
+      Registro institucional de las deliberaciones del jurado.
+      Aquí se reúnen las evaluaciones realizadas por el curso
+      para determinar qué bando defendió mejor su posición.
+    </div>
+
+    <div class="gold-rule"></div>
+  </div>
+
+  <div class="top-right">
+    <div class="founder">
+      <img src="/fundador.jpeg" alt="Retrato del fundador">
+      <div class="founder-label">Fundador · Presidente del Directorio</div>
+    </div>
+  </div>
+
+</header>
+
+<!-- =========================
+     NAVEGACIÓN
+========================= -->
+
+<div class="navline">
+  <div class="navline-label">
+    Sesión del Directorio · Registro de evaluaciones
+  </div>
+
+  <a href="/">← Vista estudiante</a>
+</div>
+
+<!-- =========================
+     CONTENIDO
+========================= -->
+
 <main class="content">
-<section class="hero"><div><h2>Registro de votaciones</h2><p>Aquí quedan reunidos los veredictos enviados por el curso.</p></div><div class="actions"><select id="filter"><option value="">Todas las presentaciones</option></select><button class="btn primary" id="refresh">↻ Actualizar</button><button class="btn" id="csv">↓ Descargar CSV</button></div></section>
+
+<section class="hero">
+
+  <div>
+    <h2>Registro de votaciones</h2>
+    <p>
+      Aquí quedan reunidos los veredictos enviados por el curso.
+    </p>
+  </div>
+
+  <div class="actions">
+
+    <select id="filter">
+      <option value="">Todas las presentaciones</option>
+    </select>
+
+    <button class="btn primary" id="refresh">
+      ↻ Actualizar
+    </button>
+
+    <button class="btn" id="csv">
+      ↓ Descargar CSV
+    </button>
+
+  </div>
+
+</section>
+
 <div id="error" class="error"></div>
-<section class="cards"><div class="card"><span>Veredictos</span><strong id="total">—</strong></div><div class="card wine"><span>Bando A</span><strong id="countA">—</strong></div><div class="card navy"><span>Bando B</span><strong id="countB">—</strong></div><div class="card"><span>Promedio general</span><strong id="avg">—</strong></div></section>
-<section class="summary"><div class="barbox"><b>Preferencia del jurado · Bando A</b><div class="barline"><div class="bar a" id="barA"></div></div></div><div class="barbox"><b>Preferencia del jurado · Bando B</b><div class="barline"><div class="bar b" id="barB"></div></div></div></section>
-<section class="table-wrap"><div class="table-head"><strong>Detalle de los veredictos</strong><span id="updated">Cargando…</span></div><table><thead><tr><th>Fecha</th><th>Presentación</th><th>Estudiante</th><th>Convenció mejor</th><th>Argumentación</th><th>Refutación</th><th>Actuación</th><th>Justificación</th><th>Evidencia</th></tr></thead><tbody id="tbody"></tbody></table><div class="empty" id="empty" style="display:none">Todavía no hay votaciones registradas.</div></section>
-</main></div></div>
+
+<!-- =========================
+     INDICADORES
+========================= -->
+
+<section class="cards">
+
+  <div class="card">
+    <span>Veredictos</span>
+    <strong id="total">—</strong>
+  </div>
+
+  <div class="card wine">
+    <span>Bando A</span>
+    <strong id="countA">—</strong>
+  </div>
+
+  <div class="card navy">
+    <span>Bando B</span>
+    <strong id="countB">—</strong>
+  </div>
+
+  <div class="card">
+    <span>Promedio general · /15</span>
+    <strong id="avg">—</strong>
+  </div>
+
+</section>
+
+<!-- =========================
+     PREFERENCIA DEL JURADO
+========================= -->
+
+<div class="section-caption">
+  Preferencia del jurado
+</div>
+
+<section class="summary">
+
+  <div class="barbox">
+
+    <div class="bar-header">
+      <span>Bando A</span>
+      <span class="percent" id="percentA">0%</span>
+    </div>
+
+    <div class="barline">
+      <div class="bar a" id="barA"></div>
+    </div>
+
+  </div>
+
+  <div class="barbox">
+
+    <div class="bar-header">
+      <span>Bando B</span>
+      <span class="percent" id="percentB">0%</span>
+    </div>
+
+    <div class="barline">
+      <div class="bar b" id="barB"></div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =========================
+     TABLA
+========================= -->
+
+<section class="table-wrap">
+
+  <div class="table-head">
+
+    <strong>Detalle de los veredictos</strong>
+
+    <span id="updated">
+      Cargando…
+    </span>
+
+  </div>
+
+  <div class="table-scroll">
+
+    <table>
+
+      <thead>
+
+        <tr>
+          <th>Fecha</th>
+          <th>Presentación</th>
+          <th>Estudiante</th>
+          <th>Convenció mejor</th>
+          <th>Argumentación</th>
+          <th>Refutación</th>
+          <th>Actuación</th>
+          <th>Justificación</th>
+          <th>Evidencia</th>
+        </tr>
+
+      </thead>
+
+      <tbody id="tbody"></tbody>
+
+    </table>
+
+  </div>
+
+  <div
+    class="empty"
+    id="empty"
+    style="display:none"
+  >
+    Todavía no hay votaciones registradas.
+  </div>
+
+</section>
+
+</main>
+
+</div>
+</div>
+
 <script>
+
 let allVotes=[];
+
 const $=id=>document.getElementById(id);
-function esc(v){return String(v??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
-function avg(v){if(!v.length)return '—';const n=v.reduce((s,x)=>s+(+x.argumentacion||0)+(+x.refutacion||0)+(+x.actuacion||0),0)/(v.length*3);return n.toFixed(2);}
+
+/* =========================
+   SEGURIDAD HTML
+========================= */
+
+function esc(v){
+
+  return String(v??'').replace(
+    /[&<>'"]/g,
+    c=>({
+      '&':'&amp;',
+      '<':'&lt;',
+      '>':'&gt;',
+      "'":'&#39;',
+      '"':'&quot;'
+    }[c])
+  );
+
+}
+
+/* =========================
+   PROMEDIO SOBRE 15
+========================= */
+
+function avg(votes){
+
+  if(!votes.length) return '—';
+
+  const total= votes.reduce(
+    (sum,v)=>
+      sum+
+      (+v.argumentacion||0)+
+      (+v.refutacion||0)+
+      (+v.actuacion||0),
+    0
+  );
+
+  return (total/votes.length).toFixed(2);
+
+}
+
+/* =========================
+   RENDER
+========================= */
+
 function render(){
- const f=$('filter').value;const votes=f?allVotes.filter(v=>String(v.presentacion)===f):allVotes;
- const a=votes.filter(v=>v.bando==='A').length,b=votes.filter(v=>v.bando==='B').length,total=votes.length;
- $('total').textContent=total;$('countA').textContent=a;$('countB').textContent=b;$('avg').textContent=avg(votes);
- $('barA').style.width=(total?a/total*100:0)+'%';$('barB').style.width=(total?b/total*100:0)+'%';
- const ps=[...new Set(allVotes.map(v=>v.presentacion))].sort((a,b)=>a-b);const sel=$('filter');const old=sel.value;sel.innerHTML='<option value="">Todas las presentaciones</option>'+ps.map(p=>`<option value="${p}">Presentación ${p}</option>`).join('');sel.value=ps.map(String).includes(old)?old:'';
- $('tbody').innerHTML=votes.map(v=>`<tr><td class="small">${v.created_at?new Date(v.created_at).toLocaleString('es-CL'):''}</td><td><b>${esc(v.presentacion)}</b></td><td>${esc(v.estudiante)}</td><td><span class="band ${esc(v.bando)}">BANDO ${esc(v.bando)}</span></td><td class="score">${esc(v.argumentacion)}/5</td><td class="score">${esc(v.refutacion)}/5</td><td class="score">${esc(v.actuacion)}/5</td><td>${esc(v.justificacion)}</td><td>${esc(v.evidencia)}</td></tr>`).join('');
- $('empty').style.display=votes.length?'none':'block';$('updated').textContent='Actualizado '+new Date().toLocaleTimeString('es-CL');
+
+  const f=$('filter').value;
+
+  const votes=
+    f
+      ? allVotes.filter(
+          v=>String(v.presentacion)===f
+        )
+      : allVotes;
+
+  const a=
+    votes.filter(v=>v.bando==='A').length;
+
+  const b=
+    votes.filter(v=>v.bando==='B').length;
+
+  const total=votes.length;
+
+  /* indicadores */
+
+  $('total').textContent=total;
+
+  $('countA').textContent=a;
+
+  $('countB').textContent=b;
+
+  $('avg').textContent=avg(votes);
+
+  /* barras */
+
+  const pctA=
+    total ? a/total*100 : 0;
+
+  const pctB=
+    total ? b/total*100 : 0;
+
+  $('barA').style.width=pctA+'%';
+
+  $('barB').style.width=pctB+'%';
+
+  $('percentA').textContent=
+    Math.round(pctA)+'%';
+
+  $('percentB').textContent=
+    Math.round(pctB)+'%';
+
+  /* filtro */
+
+  const ps=[
+    ...new Set(
+      allVotes.map(v=>v.presentacion)
+    )
+  ].sort(
+    (a,b)=>Number(a)-Number(b)
+  );
+
+  const sel=$('filter');
+
+  const old=sel.value;
+
+  sel.innerHTML=
+    '<option value="">Todas las presentaciones</option>'+
+    ps.map(
+      p=>`<option value="${esc(p)}">
+            Presentación ${esc(p)}
+          </option>`
+    ).join('');
+
+  if(
+    ps.map(String).includes(old)
+  ){
+    sel.value=old;
+  }
+
+  /* tabla */
+
+  $('tbody').innerHTML=
+
+    votes.map(v=>`
+
+      <tr>
+
+        <td class="small">
+          ${
+            v.created_at
+              ? new Date(v.created_at)
+                  .toLocaleString('es-CL')
+              : ''
+          }
+        </td>
+
+        <td>
+          <b>${esc(v.presentacion)}</b>
+        </td>
+
+        <td class="student">
+          ${esc(v.estudiante)}
+        </td>
+
+        <td>
+          <span class="band ${esc(v.bando)}">
+            BANDO ${esc(v.bando)}
+          </span>
+        </td>
+
+        <td class="score">
+          ${esc(v.argumentacion)}/5
+        </td>
+
+        <td class="score">
+          ${esc(v.refutacion)}/5
+        </td>
+
+        <td class="score">
+          ${esc(v.actuacion)}/5
+        </td>
+
+        <td class="justification">
+          ${esc(v.justificacion)}
+        </td>
+
+        <td class="evidence">
+          ${esc(v.evidencia)}
+        </td>
+
+      </tr>
+
+    `).join('');
+
+  $('empty').style.display=
+    votes.length
+      ? 'none'
+      : 'block';
+
+  $('updated').textContent=
+    'Actualizado '+
+    new Date().toLocaleTimeString('es-CL');
+
 }
+
+/* =========================
+   CARGAR VOTOS
+========================= */
+
 async function load(){
- $('error').classList.remove('show');$('updated').textContent='Actualizando…';
- try{const r=await fetch('/api/votes');const d=await r.json();if(!r.ok||!d.ok)throw new Error(d.error||'No se pudo cargar el registro.');allVotes=d.votos||[];render();}
- catch(e){$('error').textContent=e.message+' Si aparece un error de permisos, hay que habilitar lectura de la tabla votaciones en Supabase.';$('error').classList.add('show');$('tbody').innerHTML='';$('updated').textContent='Error';}
+
+  $('error').classList.remove('show');
+
+  $('updated').textContent=
+    'Actualizando…';
+
+  try{
+
+    const r=
+      await fetch('/api/votes');
+
+    const d=
+      await r.json();
+
+    if(!r.ok || !d.ok){
+
+      throw new Error(
+        d.details ||
+        d.error ||
+        d.message ||
+        'No se pudo cargar el registro.'
+      );
+
+    }
+
+    allVotes=
+      d.votos || [];
+
+    render();
+
+  }catch(e){
+
+    $('error').textContent=
+      'No se pudo cargar el registro de votaciones: '+
+      e.message;
+
+    $('error').classList.add('show');
+
+    $('tbody').innerHTML='';
+
+    $('updated').textContent=
+      'Error';
+
+  }
+
 }
-$('filter').onchange=render;$('refresh').onclick=load;$('csv').onclick=()=>{const f=$('filter').value;const votes=f?allVotes.filter(v=>String(v.presentacion)===f):allVotes;const headers=['fecha','presentacion','estudiante','bando','argumentacion','refutacion','actuacion','justificacion','evidencia'];const csv=[headers,...votes.map(v=>headers.map(h=>v[h]??''))].map(row=>row.map(x=>'"'+String(x).replaceAll('"','""')+'"').join(',')).join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}));a.download='registro-jurado-directorio.csv';a.click();};
-load();setInterval(load,30000);
-</script></body></html>
+
+/* =========================
+   FILTRO
+========================= */
+
+$('filter').onchange=render;
+
+/* =========================
+   ACTUALIZAR
+========================= */
+
+$('refresh').onclick=load;
+
+/* =========================
+   CSV
+========================= */
+
+$('csv').onclick=()=>{
+
+  const f=$('filter').value;
+
+  const votes=
+    f
+      ? allVotes.filter(
+          v=>String(v.presentacion)===f
+        )
+      : allVotes;
+
+  const headers=[
+    'fecha',
+    'presentacion',
+    'estudiante',
+    'bando',
+    'argumentacion',
+    'refutacion',
+    'actuacion',
+    'justificacion',
+    'evidencia'
+  ];
+
+  const csv=[
+    headers,
+
+    ...votes.map(
+      v=>
+        headers.map(
+          h=>v[h]??''
+        )
+    )
+
+  ]
+  .map(
+    row=>
+      row.map(
+        x=>
+          '"'+
+          String(x)
+            .replaceAll('"','""')+
+          '"'
+      ).join(',')
+  )
+  .join('\n');
+
+  const a=
+    document.createElement('a');
+
+  a.href=
+    URL.createObjectURL(
+      new Blob(
+        ['\ufeff'+csv],
+        {
+          type:
+            'text/csv;charset=utf-8'
+        }
+      )
+    );
+
+  a.download=
+    'registro-jurado-directorio.csv';
+
+  a.click();
+
+};
+
+/* =========================
+   CARGA INICIAL
+========================= */
+
+load();
+
+/* =========================
+   ACTUALIZACIÓN AUTOMÁTICA
+========================= */
+
+setInterval(
+  load,
+  30000
+);
+
+</script>
+
+</body>
+</html>
