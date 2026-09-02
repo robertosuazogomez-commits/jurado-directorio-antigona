@@ -21,6 +21,8 @@
   --gold-light:#d7c08e;
   --line:#d8cfc0;
   --muted:#716d68;
+  --danger:#8b2525;
+  --danger-light:#f7e6e5;
   --shadow:0 18px 45px rgba(25,23,26,.13);
 }
 
@@ -262,6 +264,22 @@ select:hover{
 
 .btn.primary:hover{
   background:#302c31;
+}
+
+/* =========================
+   BOTÓN RESETEAR
+========================= */
+
+.btn.danger{
+  background:transparent;
+  color:var(--danger);
+  border-color:var(--danger);
+}
+
+.btn.danger:hover{
+  background:var(--danger);
+  color:#fff;
+  box-shadow:0 4px 10px rgba(139,37,37,.18);
 }
 
 /* =========================
@@ -631,9 +649,15 @@ td.small{
 <header class="top">
 
   <div class="top-left">
-    <div class="ey">Panel de profesor · Registro de veredictos</div>
 
-    <h1>Antígona ·<br>El Jurado del Directorio</h1>
+    <div class="ey">
+      Panel de profesor · Registro de veredictos
+    </div>
+
+    <h1>
+      Antígona ·<br>
+      El Jurado del Directorio
+    </h1>
 
     <div class="subtitle">
       Registro institucional de las deliberaciones del jurado.
@@ -642,13 +666,24 @@ td.small{
     </div>
 
     <div class="gold-rule"></div>
+
   </div>
 
   <div class="top-right">
+
     <div class="founder">
-      <img src="/fundador.jpeg" alt="Retrato del fundador">
-      <div class="founder-label">Fundador · Presidente del Directorio</div>
+
+      <img
+        src="/fundador.jpeg"
+        alt="Retrato del fundador"
+      >
+
+      <div class="founder-label">
+        Fundador · Presidente del Directorio
+      </div>
+
     </div>
+
   </div>
 
 </header>
@@ -658,11 +693,15 @@ td.small{
 ========================= -->
 
 <div class="navline">
+
   <div class="navline-label">
     Sesión del Directorio · Registro de evaluaciones
   </div>
 
-  <a href="/">← Vista estudiante</a>
+  <a href="/">
+    ← Vista estudiante
+  </a>
+
 </div>
 
 <!-- =========================
@@ -674,31 +713,56 @@ td.small{
 <section class="hero">
 
   <div>
-    <h2>Registro de votaciones</h2>
+
+    <h2>
+      Registro de votaciones
+    </h2>
+
     <p>
       Aquí quedan reunidos los veredictos enviados por el curso.
     </p>
+
   </div>
 
   <div class="actions">
 
     <select id="filter">
-      <option value="">Todas las presentaciones</option>
+
+      <option value="">
+        Todas las presentaciones
+      </option>
+
     </select>
 
-    <button class="btn primary" id="refresh">
+    <button
+      class="btn primary"
+      id="refresh"
+    >
       ↻ Actualizar
     </button>
 
-    <button class="btn" id="csv">
+    <button
+      class="btn"
+      id="csv"
+    >
       ↓ Descargar CSV
+    </button>
+
+    <button
+      class="btn danger"
+      id="resetVotes"
+    >
+      ⚠ Resetear votación
     </button>
 
   </div>
 
 </section>
 
-<div id="error" class="error"></div>
+<div
+  id="error"
+  class="error"
+></div>
 
 <!-- =========================
      INDICADORES
@@ -707,23 +771,51 @@ td.small{
 <section class="cards">
 
   <div class="card">
-    <span>Veredictos</span>
-    <strong id="total">—</strong>
+
+    <span>
+      Veredictos
+    </span>
+
+    <strong id="total">
+      —
+    </strong>
+
   </div>
 
   <div class="card wine">
-    <span>Bando A</span>
-    <strong id="countA">—</strong>
+
+    <span>
+      Bando A
+    </span>
+
+    <strong id="countA">
+      —
+    </strong>
+
   </div>
 
   <div class="card navy">
-    <span>Bando B</span>
-    <strong id="countB">—</strong>
+
+    <span>
+      Bando B
+    </span>
+
+    <strong id="countB">
+      —
+    </strong>
+
   </div>
 
   <div class="card">
-    <span>Promedio general · /15</span>
-    <strong id="avg">—</strong>
+
+    <span>
+      Promedio general · /15
+    </span>
+
+    <strong id="avg">
+      —
+    </strong>
+
   </div>
 
 </section>
@@ -741,12 +833,27 @@ td.small{
   <div class="barbox">
 
     <div class="bar-header">
-      <span>Bando A</span>
-      <span class="percent" id="percentA">0%</span>
+
+      <span>
+        Bando A
+      </span>
+
+      <span
+        class="percent"
+        id="percentA"
+      >
+        0%
+      </span>
+
     </div>
 
     <div class="barline">
-      <div class="bar a" id="barA"></div>
+
+      <div
+        class="bar a"
+        id="barA"
+      ></div>
+
     </div>
 
   </div>
@@ -754,12 +861,27 @@ td.small{
   <div class="barbox">
 
     <div class="bar-header">
-      <span>Bando B</span>
-      <span class="percent" id="percentB">0%</span>
+
+      <span>
+        Bando B
+      </span>
+
+      <span
+        class="percent"
+        id="percentB"
+      >
+        0%
+      </span>
+
     </div>
 
     <div class="barline">
-      <div class="bar b" id="barB"></div>
+
+      <div
+        class="bar b"
+        id="barB"
+      ></div>
+
     </div>
 
   </div>
@@ -774,7 +896,9 @@ td.small{
 
   <div class="table-head">
 
-    <strong>Detalle de los veredictos</strong>
+    <strong>
+      Detalle de los veredictos
+    </strong>
 
     <span id="updated">
       Cargando…
@@ -789,6 +913,7 @@ td.small{
       <thead>
 
         <tr>
+
           <th>Fecha</th>
           <th>Presentación</th>
           <th>Estudiante</th>
@@ -798,6 +923,7 @@ td.small{
           <th>Actuación</th>
           <th>Justificación</th>
           <th>Evidencia</th>
+
         </tr>
 
       </thead>
@@ -856,14 +982,15 @@ function avg(votes){
 
   if(!votes.length) return '—';
 
-  const total= votes.reduce(
-    (sum,v)=>
-      sum+
-      (+v.argumentacion||0)+
-      (+v.refutacion||0)+
-      (+v.actuacion||0),
-    0
-  );
+  const total=
+    votes.reduce(
+      (sum,v)=>
+        sum+
+        (+v.argumentacion||0)+
+        (+v.refutacion||0)+
+        (+v.actuacion||0),
+      0
+    );
 
   return (total/votes.length).toFixed(2);
 
@@ -885,10 +1012,14 @@ function render(){
       : allVotes;
 
   const a=
-    votes.filter(v=>v.bando==='A').length;
+    votes.filter(
+      v=>v.bando==='A'
+    ).length;
 
   const b=
-    votes.filter(v=>v.bando==='B').length;
+    votes.filter(
+      v=>v.bando==='B'
+    ).length;
 
   const total=votes.length;
 
@@ -910,9 +1041,11 @@ function render(){
   const pctB=
     total ? b/total*100 : 0;
 
-  $('barA').style.width=pctA+'%';
+  $('barA').style.width=
+    pctA+'%';
 
-  $('barB').style.width=pctB+'%';
+  $('barB').style.width=
+    pctB+'%';
 
   $('percentA').textContent=
     Math.round(pctA)+'%';
@@ -924,7 +1057,9 @@ function render(){
 
   const ps=[
     ...new Set(
-      allVotes.map(v=>v.presentacion)
+      allVotes.map(
+        v=>v.presentacion
+      )
     )
   ].sort(
     (a,b)=>Number(a)-Number(b)
@@ -957,16 +1092,20 @@ function render(){
       <tr>
 
         <td class="small">
+
           ${
             v.created_at
               ? new Date(v.created_at)
                   .toLocaleString('es-CL')
               : ''
           }
+
         </td>
 
         <td>
-          <b>${esc(v.presentacion)}</b>
+          <b>
+            ${esc(v.presentacion)}
+          </b>
         </td>
 
         <td class="student">
@@ -974,9 +1113,11 @@ function render(){
         </td>
 
         <td>
+
           <span class="band ${esc(v.bando)}">
             BANDO ${esc(v.bando)}
           </span>
+
         </td>
 
         <td class="score">
@@ -1077,6 +1218,91 @@ $('filter').onchange=render;
 ========================= */
 
 $('refresh').onclick=load;
+
+/* =========================
+   RESETEAR VOTACIÓN
+========================= */
+
+$('resetVotes').onclick=async()=>{
+
+  const confirmed=
+    confirm(
+      '⚠ ATENCIÓN\\n\\n'+
+      'Esto eliminará TODAS las votaciones registradas.\\n\\n'+
+      'La acción no se puede deshacer.\\n\\n'+
+      '¿Quieres comenzar una nueva votación desde cero?'
+    );
+
+  if(!confirmed)return;
+
+  const button=$('resetVotes');
+
+  button.disabled=true;
+
+  button.textContent=
+    '⏳ Reseteando…';
+
+  $('error').classList.remove('show');
+
+  try{
+
+    const r=
+      await fetch(
+        '/api/votes/reset',
+        {
+          method:'POST',
+          headers:{
+            'Content-Type':
+              'application/json'
+          }
+        }
+      );
+
+    const d=
+      await r.json();
+
+    if(!r.ok || !d.ok){
+
+      throw new Error(
+        d.details ||
+        d.error ||
+        d.message ||
+        'No se pudo resetear la votación.'
+      );
+
+    }
+
+    /*
+     * Limpiamos inmediatamente la interfaz.
+     */
+    allVotes=[];
+
+    $('filter').value='';
+
+    render();
+
+    $('updated').textContent=
+      'Nueva votación iniciada · '+
+      new Date().toLocaleTimeString('es-CL');
+
+  }catch(e){
+
+    $('error').textContent=
+      'No se pudo resetear la votación: '+
+      e.message;
+
+    $('error').classList.add('show');
+
+  }finally{
+
+    button.disabled=false;
+
+    button.textContent=
+      '⚠ Resetear votación';
+
+  }
+
+};
 
 /* =========================
    CSV
